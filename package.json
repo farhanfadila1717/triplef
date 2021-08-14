@@ -1,0 +1,23 @@
+{
+  "name": "triplef",
+  "version": "1.0.0",
+  "description": "website for unidra competition",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhanfadila1717/triplef.git"
+  },
+  "author": "farhan fadila, fandy ramadhan, fuad zulyansyah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/farhanfadila1717/triplef/issues"
+  },
+  "homepage": "https://github.com/farhanfadila1717/triplef#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

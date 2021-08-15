@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 
 const app = express();
+const appName = 'Share.doc';
 const port = 5000;
 
 //// MONGO DB CONFIGURATION
@@ -36,21 +37,32 @@ app.use(
   })
 );
 
+app.use(expressLayaouts);
+
 app.set('view engine', 'ejs');
 
 
 //// ROUTING
 app.get('/', (req, res) => {
   req.session.isAuth = true;
-  res.render('index');
+  res.render('index', {
+    layout: 'layouts/main_layout',
+    title: appName,
+  });
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {
+    layout: 'layouts/main_layout',
+    title: 'Login',
+  });
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {
+    layout: 'layouts/main_layout',
+    title: 'Register',
+  });
 });
 
 

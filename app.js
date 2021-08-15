@@ -1,31 +1,51 @@
 const express = require('express');
-const mysql = require('mysql');
+const expressLayaouts = require('express-ejs-layouts');
+const session = require('express-session');
+const MongoDBSession = require('connect-mongodb-session')(session);
+const mongoose = require('mongoose');
+
+
 const app = express();
+const port = 5000;
 
-// CREATE connection
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'triplef'
-});
+//// MONGO DB CONFIGURATION
+const mongoURI = 'mongodb://localhost:27017/triplef';
 
-db.connect((err) => {
-  if (err) {
-    throw err;
+mongoose.connect(mongoURI,
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
   }
-  console.log('My sql connected');
+).then(res => {
+  console.log('MongoDB Connected');
 });
 
-app.get('/createdb', (req, res) => {
-  let sql = 'CREATE DATABASE triplef';
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    console.log(result);
-    res.send('Database created');
-  });
+const store = new MongoDBSession({
+  uri: mongoURI,
+  collection: 'session',
 });
 
-app.listen('3000', () => {
-  console.log('Server started on port 3000');
+
+app.use(
+  session({
+    secret: 'key-triplef',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
+);
+
+app.set('view engine', 'ejs');
+
+
+//// ROUTING
+app.get('/', (req, res) => {
+  req.session.isAuth = true;
+  res.render('index');
+});
+
+
+app.listen(port, () => {
+  console.log(`Server started on port http://localhost:${port}`);
 });

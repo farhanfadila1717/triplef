@@ -58,17 +58,24 @@ const isAuth = (req, res, next) => {
   }
 }
 
+const isExisistingAuth = (req, res, next) => {
+  if (req.session.isAuth && req.session.user !== null) {
+    return res.redirect('/home');
+  } else {
+    return next();
+  }
+}
+
 
 //// ROUTING
-app.get('/', (req, res) => {
-  req.session.isAuth = true;
+app.get('/', isExisistingAuth, (req, res) => {
   res.render('index', {
     layout: 'layouts/main_layout',
     title: appName,
   });
 });
 
-app.get('/login', (req, res) => {
+app.get('/login', isExisistingAuth, (req, res) => {
   res.render('login', {
     layout: 'layouts/main_layout',
     title: 'Login',
@@ -89,9 +96,13 @@ app.post('/login', async (req, res) => {
   if (!isMatch) {
     return res.redirect('/login');
   }
+
+  req.session.isAuth = true;
+  req.session.user = user;
+  res.redirect('/home');
 });
 
-app.get('/register', (req, res) => {
+app.get('/register', isExisistingAuth, (req, res) => {
   res.render('register', {
     layout: 'layouts/main_layout',
     title: 'Register',
@@ -123,5 +134,24 @@ app.post('/register', async (req, res) => {
   );
   await user.save();
 
-  res.redirect('/login');
+  console.log(user._id);
+  req.session.isAuth = true;
+  req.session.user = user;
+  res.redirect('/home');
+});
+
+app.get('/home', isAuth, (req, res) => {
+  res.render('home', {
+    layout: 'layouts/main_layout',
+    title: 'Home',
+    user: req.session.user,
+  });
+});
+
+app.post('/logout', (req, res) => {
+  req.session.isAuth = false;
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/login");
+  });
 });

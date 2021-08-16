@@ -1,1 +1,38 @@
-<h1>Register page</h1>
+<div class="container">
+  <h2 class="mb-4 mt-5">Register</h1>
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label for="fullname" class="form-label">Fullname</label>
+        <input type="text" name="name" class="form-control" id="fullname">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3">
+        <label for="id_major" class="form-label">Jurusan Kuliah</label>
+        <input type="text" name="major" class="form-control" id="id_major">
+      </div>
+      <select class="form-select mb-3" aria-label="Default select example" name="graduation_year">
+        <option selected>Pilih kampus</option>
+        <% for( let i=0; i < campuss.length; i++ ) { %>
+          <option value=<%=campuss[i].id_campus %>> <%= campuss[i].campus_name %>
+          </option>
+          <% } %>
+      </select>
+      <select class="form-select mb-3" aria-label="Default select example" name="graduation_year">
+        <option selected>Tahun lulus</option>
+        <% for( let i=0; i < 20; i++ ) { %>
+          <% const year=2020 + i %>
+            <option value=<%=year %>> <%= year %>
+            </option>
+            <% } %>
+      </select>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

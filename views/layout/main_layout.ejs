@@ -5,17 +5,16 @@
   <title>
     <%= title %>
   </title>
-  <%- include('temp/css'); %>
+  <%- include('../temp/css'); %>
 </head>
 
 <body>
-  <%- include('temp/sidebar'); %>
+  <%- include('../temp/sidebar'); %>
     <div class="content">
-      <%- include('temp/navbar'); %>
+      <%- include('../temp/navbar'); %>
         <%- include(layout); %>
-          <%- include('temp/button-add'); %>
     </div>
 </body>
-<%- include('temp/main_js'); %>
+<%- include('../temp/main_js'); %>
 
 </html>

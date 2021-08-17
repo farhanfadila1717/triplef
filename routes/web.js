@@ -5,7 +5,7 @@ const appName = 'Share.doc';
 module.exports = (app) => {
 
     app.get('/', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/index',
             title: appName,
@@ -14,7 +14,7 @@ module.exports = (app) => {
     })
 
     app.get('/library', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/library',
             title: appName,
@@ -23,7 +23,7 @@ module.exports = (app) => {
     })
 
     app.get('/university', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/university',
             title: appName,
@@ -32,7 +32,7 @@ module.exports = (app) => {
     })
 
     app.get('/detail-university', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/detail-university',
             title: appName,
@@ -41,7 +41,7 @@ module.exports = (app) => {
     })
 
     app.get('/upload', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/upload',
             title: appName,
@@ -50,7 +50,7 @@ module.exports = (app) => {
     })
 
     app.get('/profile-mobile', (req, res) => {
-        // req.session.isAuth = true;
+
         res.render('layout/main_layout', {
             layout: '../page/profile-mobile',
             title: appName,
@@ -59,7 +59,6 @@ module.exports = (app) => {
     })
 
     app.get('/edit-profile', (req, res) => {
-        // req.session.isAuth = true;
         res.render('layout/main_layout', {
             layout: '../page/edit-profile',
             title: appName,
@@ -80,14 +79,4 @@ module.exports = (app) => {
             title: 'register',
         })
     })
-
-    // app.get('/register', (req, res) => {
-    //     res.render('main_layout', {
-    //         layout: 'register',
-    //         main_css: './temp/main_css',
-    //         main_js: './temp/main_js',
-    //         title: 'register',
-    //     })
-    // })
-
 }

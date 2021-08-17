@@ -1,3 +1,4 @@
+//// Import Node Modules
 const express = require('express');
 const expressLayaouts = require('express-ejs-layouts');
 const bcrypt = require('bcryptjs');
@@ -5,8 +6,16 @@ const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
+//// Import Models
 const UserModel = require('./models/User');
 const Campuss = require('./models/Campus');
+
+//// Import Sevices
+const uploadProfilePic = require('./services/upload_image');
+const uploadFilePDF = require('./services/upload_file');
+
+//// Import Middleware
+const AuthenticationMiddleware = require('./middleware/authentication');
 
 const app = express();
 const appName = 'Share.doc';
@@ -48,34 +57,15 @@ app.use(expressLayaouts);
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-//// MIDLEWARE
-
-const isAuth = (req, res, next) => {
-  if (req.session.isAuth) {
-    next();
-  } else {
-    res.redirect('/login');
-  }
-}
-
-const isExisistingAuth = (req, res, next) => {
-  if (req.session.isAuth && req.session.user !== null) {
-    return res.redirect('/home');
-  } else {
-    return next();
-  }
-}
-
-
 //// ROUTING
-app.get('/', isExisistingAuth, (req, res) => {
+app.get('/', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
   res.render('index', {
     layout: 'layouts/main_layout',
     title: appName,
   });
 });
 
-app.get('/login', isExisistingAuth, (req, res) => {
+app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
   res.render('login', {
     layout: 'layouts/main_layout',
     title: 'Login',
@@ -102,7 +92,7 @@ app.post('/login', async (req, res) => {
   res.redirect('/home');
 });
 
-app.get('/register', isExisistingAuth, (req, res) => {
+app.get('/register', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
   res.render('register', {
     layout: 'layouts/main_layout',
     title: 'Register',
@@ -110,10 +100,12 @@ app.get('/register', isExisistingAuth, (req, res) => {
   });
 });
 
-app.post('/register', async (req, res) => {
-  const { name, email, password, major, graduation_year } = req.body;
-
+app.post('/register', uploadProfilePic.single('profile_pic'), async (req, res) => {
+  const { name, email, password, major, graduation_year, campus_id } = req.body;
   let userExisting = await UserModel.findOne({ email });
+
+
+  const fileName = req.file.filename;
 
   if (userExisting) {
     return res.redirect('/register');
@@ -124,12 +116,13 @@ app.post('/register', async (req, res) => {
   user = new UserModel(
     {
       full_name: name,
-      username: name,
       email,
       password: hashedPassword,
-      campus_id: 111,
+      major,
+      profile_pic_url: fileName,
+      campus_id,
       graduation_year: parseInt(graduation_year),
-      major_name: major,
+      date_created: Date.now(),
     }
   );
   await user.save();
@@ -140,7 +133,7 @@ app.post('/register', async (req, res) => {
   res.redirect('/home');
 });
 
-app.get('/home', isAuth, (req, res) => {
+app.get('/home', AuthenticationMiddleware.isAuth, (req, res) => {
   res.render('home', {
     layout: 'layouts/main_layout',
     title: 'Home',
@@ -148,8 +141,12 @@ app.get('/home', isAuth, (req, res) => {
   });
 });
 
+app.post('/upload', uploadProfilePic.single('profile_pic'), (req, res) => {
+  console.log(req.file.filename);
+  res.send("Success uploaded");
+});
+
 app.post('/logout', (req, res) => {
-  req.session.isAuth = false;
   req.session.destroy((err) => {
     if (err) throw err;
     res.redirect("/login");

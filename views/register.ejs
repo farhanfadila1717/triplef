@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="mb-4 mt-5">Register</h1>
-    <form action="/register" method="POST">
+    <form action="/register" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="fullname" class="form-label">Fullname</label>
         <input type="text" name="name" class="form-control" id="fullname">
@@ -14,24 +14,35 @@
         <input type="password" name="password" class="form-control" id="exampleInputPassword1">
       </div>
       <div class="mb-3">
+        <label for="formFile" class="form-label">Profile Picture</label>
+        <input class="form-control" name="profile_pic" type="file" id="formFile">
+      </div>
+      <div class="mb-3">
         <label for="id_major" class="form-label">Jurusan Kuliah</label>
         <input type="text" name="major" class="form-control" id="id_major">
       </div>
-      <select class="form-select mb-3" aria-label="Default select example" name="graduation_year">
-        <option selected>Pilih kampus</option>
-        <% for( let i=0; i < campuss.length; i++ ) { %>
-          <option value=<%=campuss[i].id_campus %>> <%= campuss[i].campus_name %>
-          </option>
-          <% } %>
-      </select>
-      <select class="form-select mb-3" aria-label="Default select example" name="graduation_year">
-        <option selected>Tahun lulus</option>
-        <% for( let i=0; i < 10; i++ ) { %>
-          <% const year=2020 + i %>
-            <option value=<%=year %>> <%= year %>
+      <div class="mb-3">
+        <label for="graduation_year" class="form-label">Pilih kampus</label>
+
+        <select class="form-select" aria-label="Default select example" name="campuss_id">
+          <option selected>Pilih kampus</option>
+          <% for( let i=0; i < campuss.length; i++ ) { %>
+            <option value=<%=campuss[i].id_campus %>> <%= campuss[i].campus_name %>
             </option>
             <% } %>
-      </select>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="graduation_year" class="form-label">Tahun lulus</label>
+        <select class="form-select aria-label=" Default select example" name="graduation_year">
+          <option selected>Tahun lulus</option>
+          <% for( let i=0; i < 10; i++ ) { %>
+            <% const year=2020 + i %>
+              <option value=<%=year %>> <%= year %>
+              </option>
+              <% } %>
+        </select>
+      </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

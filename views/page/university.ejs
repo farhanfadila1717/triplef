@@ -1,22 +1,22 @@
 <div class="my-4">
-    <div class="container-fluid">
-        <div class="row">
-            <% campuss.forEach(element=> { %>
-                <div class="col-md-4">
-                    <% const detail=`/detail-university?id=${element.campuss_id}` %>
-                        <a href=<%=detail %> class="text-decoration-none">
-                            <div class="box-white hover-shadow p-5">
-                                <div class="text-center">
-                                    <% const image=`img/campuss/${element.image}` %>
-                                        <img src=<%=image %> class="img-univ" alt="">
-                                        <h5 class="text-dark mt-3">
-                                            <%= element.campuss_name %>
-                                        </h5>
-                                </div>
-                            </div>
-                        </a>
+  <div class="container-fluid">
+    <div class="row">
+      <% campuss.forEach(element=> { %>
+        <div class="col-md-4">
+          <% const detail=`/detail-university?id=${element.campuss_id}` %>
+            <a href=<%=detail %> class="text-decoration-none">
+              <div class="box-white hover-shadow p-5">
+                <div class="text-center">
+                  <% const image=`img/campuss/${element.image}` %>
+                    <img src=<%=image %> class="img-univ" alt="">
+                    <h5 class="text-dark mt-3">
+                      <%= element.campuss_name %>
+                    </h5>
                 </div>
-                <% }) %>
+              </div>
+            </a>
         </div>
+        <% }) %>
     </div>
+  </div>
 </div>

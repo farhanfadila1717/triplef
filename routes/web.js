@@ -23,6 +23,8 @@ module.exports = (app) => {
       title: appName,
       page_name: 'home',
       user: req.session.user ?? '',
+      campuss: Campuss.slice(0, 3),
+      usercampuss: req.session.campuss ?? '',
     });
   })
 
@@ -32,6 +34,7 @@ module.exports = (app) => {
       title: appName,
       page_name: 'library',
       user: req.session.user ?? '',
+      usercampuss: req.session.campuss ?? '',
     });
   })
 
@@ -42,6 +45,7 @@ module.exports = (app) => {
       page_name: 'university',
       campuss: Campuss,
       user: req.session.user ?? '',
+      usercampuss: req.session.campuss ?? '',
     });
   })
 
@@ -55,6 +59,7 @@ module.exports = (app) => {
       page_name: 'university',
       user: req.session.user ?? '',
       campuss,
+      usercampuss: req.session.campuss ?? '',
     });
   })
 
@@ -63,6 +68,8 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: 'Upload',
       page_name: 'upload',
+      user: req.session.user ?? '',
+      usercampuss: req.session.campuss ?? '',
     })
   })
 
@@ -79,11 +86,14 @@ module.exports = (app) => {
       layout: 'layout/main_auth',
       title: appName,
       page_name: 'edit-profile',
+      user: req.session.user ?? '',
+      usercampuss: req.session.campuss ?? '',
     })
   })
 
   app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
     const message = req.query.message ?? '';
+
     res.render('login', {
       layout: 'layout/main_auth',
       title: 'login',
@@ -107,8 +117,10 @@ module.exports = (app) => {
       return res.redirect('/login');
     }
 
-    req.session.isAuth = true;
+    const campuss = searchArray.getObject(Campuss, 'campuss_id', user.campuss_id)[0];
     req.session.user = user;
+    req.session.isAuth = true;
+    req.session.campuss = campuss;
 
     res.redirect('/');
   });
@@ -146,9 +158,12 @@ module.exports = (app) => {
     });
 
     await user.save();
+    const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
 
+    const data = { user, campuss };
     req.session.isAuth = true;
     req.session.user = user;
+    req.session.campuss = campuss;
     res.redirect('/');
   });
 

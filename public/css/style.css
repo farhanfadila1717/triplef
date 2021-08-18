@@ -321,6 +321,7 @@ label {
 }
 
 .btn-blue-dark {
+    align-items: center;
     background: #00008C;
     color: #fff;
 }

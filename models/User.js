@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const placeholder_image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4y-6ppt-jZx6W1RtuKI6mXr2mbyPMy8mG2QhjumYJLgI5m8riAEPHwHpgsUWnrz7lZNU&usqp=CAU';
 
 const userSchema = new Schema({
-  full_name: {
+  name: {
     type: String,
     required: true,
   },
@@ -20,17 +20,17 @@ const userSchema = new Schema({
     type: String,
     default: placeholder_image,
   },
-  major: {
-    type: String,
-    default: 'Tehnik Informatika',
-  },
-  campus_id: {
+  campuss_id: {
     type: Number,
     default: 111,
   },
-  graduation_year: {
+  year: {
     type: Number,
     default: 0,
+  },
+  description: {
+    type: String,
+    default: '',
   },
   date_created: {
     type: Number,

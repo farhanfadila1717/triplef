@@ -1,5 +1,6 @@
 //// ROUTING
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const appName = 'Share.doc';
 
 //// Import Models
@@ -47,10 +48,10 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/upload', (req, res) => {
+  app.get('/upload', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/upload', {
       layout: 'layout/main_layout',
-      title: appName,
+      title: 'Upload',
       page_name: 'upload',
     })
   })
@@ -83,10 +84,54 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.get('/register', (req, res) => {
+  app.get('/register', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
     res.render('register', {
       layout: 'layout/main_auth',
-      title: 'register',
+      title: 'Register',
+      campuss: Campuss,
     })
-  })
+  });
+
+  app.post('/register', uploadProfilePic.single('profile_pic'), async (req, res) => {
+
+    const { name, email, password, year, description, campuss_id } = req.body;
+
+    let existingUser = await UserModel.findOne({ email });
+    const profilePic = req.file.filename;
+
+    if (existingUser) {
+      return res.redirect('/register');
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    user = new UserModel({
+      name,
+      email,
+      password: hashedPassword,
+      profile_pic_url: profilePic,
+      campuss_id: parseInt(campuss_id),
+      year: parseInt(year),
+      description,
+      date_created: Date.now(),
+    });
+
+    await user.save();
+
+    req.session.isAuth = true;
+    req.session.user = user;
+    res.redirect('/');
+  });
+
+  app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) throw err;
+      res.redirect("/login");
+    });
+  });
+
+  app.post('/upload', uploadProfilePic.single('profile'), async (req, res) => {
+    console.log(req.file);
+    res.send('Success');
+  });
 }

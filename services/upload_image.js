@@ -13,7 +13,8 @@ const fileStorage = multer.diskStorage({
 });
 
 const uploadProfilePic = multer({
-  storage: fileStorage, fileFilter: (req, file, cb) => {
+  storage: fileStorage,
+  fileFilter: (req, file, cb) => {
     UploadMiddleware.checkFileType(file, cb, /jpeg|jpg|png|gif/);
   }
 });

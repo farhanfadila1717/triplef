@@ -29,7 +29,6 @@ app.set('view engine', 'ejs');
 app.use(expressLayaouts);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-require('./routes/web.js')(app);
 app.use(
   session({
     secret: 'key-triplef',
@@ -38,6 +37,8 @@ app.use(
     store: store,
   })
 );
+
+require('./routes/web.js')(app);
 
 app.listen(port, () => {
   console.log(`Server started on port http://localhost:${port}`);

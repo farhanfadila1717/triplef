@@ -23,7 +23,7 @@ module.exports = (app) => {
       title: appName,
       page_name: 'home',
       user: req.session.user ?? '',
-    })
+    });
   })
 
   app.get('/library', (req, res) => {
@@ -32,7 +32,7 @@ module.exports = (app) => {
       title: appName,
       page_name: 'library',
       user: req.session.user ?? '',
-    })
+    });
   })
 
   app.get('/university', (req, res) => {
@@ -42,7 +42,7 @@ module.exports = (app) => {
       page_name: 'university',
       campuss: Campuss,
       user: req.session.user ?? '',
-    })
+    });
   })
 
   app.get('/detail-university', (req, res) => {
@@ -58,7 +58,7 @@ module.exports = (app) => {
       page_name: 'university',
       user: req.session.user ?? '',
       campuss,
-    })
+    });
   })
 
   app.get('/upload', AuthenticationMiddleware.isAuth, (req, res) => {

@@ -46,11 +46,8 @@ module.exports = (app) => {
   })
 
   app.get('/detail-university', (req, res) => {
-
     const campuss_id = req.query.id ?? '111';
-
     const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
-
 
     res.render('page/detail-university', {
       layout: 'layout/main_layout',

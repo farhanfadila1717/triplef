@@ -32,7 +32,7 @@
           <select class="form-select form-light" aria-label="Default select example" name="campuss_id" required="">
             <option selected>Pilih Universitas</option>
             <% for( let i=0; i < campuss.length; i++ ) { %>
-              <option value=<%=campuss[i].id_campus %>> <%= campuss[i].campus_name %>
+              <option value=<%=campuss[i].campuss_id %>> <%= campuss[i].campus_name %>
               </option>
               <% } %>
           </select>

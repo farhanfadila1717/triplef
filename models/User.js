@@ -21,8 +21,8 @@ const userSchema = new Schema({
     default: placeholder_image,
   },
   campuss_id: {
-    type: Number,
-    default: 111,
+    type: String,
+    default: "111",
   },
   year: {
     type: Number,

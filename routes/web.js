@@ -10,6 +10,7 @@ const Campuss = require('../models/Campus');
 //// Import Sevices
 const uploadProfilePic = require('../services/upload_image');
 const uploadFilePDF = require('../services/upload_file');
+const searchArray = require('../services/search_array');
 
 //// Import Middleware
 const AuthenticationMiddleware = require('../middleware/authentication');
@@ -21,6 +22,7 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'home',
+      user: req.session.user ?? '',
     })
   })
 
@@ -29,6 +31,7 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'library',
+      user: req.session.user ?? '',
     })
   })
 
@@ -37,14 +40,24 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'university',
+      campuss: Campuss,
+      user: req.session.user ?? '',
     })
   })
 
   app.get('/detail-university', (req, res) => {
+
+    const campuss_id = req.query.id ?? '111';
+
+    const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
+
+
     res.render('page/detail-university', {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'university',
+      user: req.session.user ?? '',
+      campuss,
     })
   })
 
@@ -56,7 +69,7 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/profile-mobile', (req, res) => {
+  app.get('/profile-mobile', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/profile-mobile', {
       layout: 'layout/main_layout',
       title: appName,
@@ -64,7 +77,7 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/edit-profile', (req, res) => {
+  app.get('/edit-profile', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/edit-profile', {
       layout: 'layout/main_auth',
       title: appName,
@@ -72,19 +85,38 @@ module.exports = (app) => {
     })
   })
 
-  app.get('/login', (req, res) => {
+  app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
+    const message = req.query.message ?? '';
     res.render('login', {
       layout: 'layout/main_auth',
       title: 'login',
+      message,
     });
   });
 
-  app.post('/login', (req, res) => {
-    console.log(req.body);
+  app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    let user = await UserModel.findOne({ email });
+
+    if (!user) {
+      const message = encodeURIComponent('Email tidak terdaftar');
+      return res.redirect('/login?message=' + message);
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.redirect('/login');
+    }
+
+    req.session.isAuth = true;
+    req.session.user = user;
+
     res.redirect('/');
   });
 
-  app.get('/register', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
+  app.get('/register', (req, res) => {
     res.render('register', {
       layout: 'layout/main_auth',
       title: 'Register',
@@ -110,7 +142,7 @@ module.exports = (app) => {
       email,
       password: hashedPassword,
       profile_pic_url: profilePic,
-      campuss_id: parseInt(campuss_id),
+      campuss_id: campuss_id,
       year: parseInt(year),
       description,
       date_created: Date.now(),
@@ -128,10 +160,5 @@ module.exports = (app) => {
       if (err) throw err;
       res.redirect("/login");
     });
-  });
-
-  app.post('/upload', uploadProfilePic.single('profile'), async (req, res) => {
-    console.log(req.file);
-    res.send('Success');
   });
 }

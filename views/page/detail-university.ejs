@@ -14,9 +14,12 @@
                     </div>
                     <div class="box-white">
                         <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
+                            <% const image=`img/campuss/${campuss.image}` %>
+                                <img src=<%=image %> class="img-univ" alt= <%= campuss.campuss_name %> >
+                                    <h5 class="text-dark mt-3">
+                                        <%= campuss.campuss_name %>
+                                    </h5>
+                                    <p class="text-grey"> 20 Dokumen </p>
                         </div>
                     </div>
                 </div>

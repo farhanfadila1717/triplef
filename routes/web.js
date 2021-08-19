@@ -7,6 +7,7 @@ const UserModel = require('../models/User');
 const Campuss = require('../models/Campus');
 const PostingModel = require('../models/Posting');
 const DownloadModel = require('../models/Download');
+const mongoose = require('mongoose');
 
 //// Import Sevices
 const uploadProfilePic = require('../services/upload_image');
@@ -20,7 +21,9 @@ const AuthenticationMiddleware = require('../middleware/authentication');
 module.exports = (app) => {
   app.get('/', async (req, res) => {
 
-    let posting = await PostingModel.find();
+    let posting = await PostingModel.find().sort({
+      date_created: -1,
+    });
 
     res.render('page/index', {
       layout: 'layout/main_layout',
@@ -32,12 +35,23 @@ module.exports = (app) => {
     });
   })
 
-  app.get('/library', (req, res) => {
+  app.get('/library', AuthenticationMiddleware.isAuth, async (req, res) => {
+
+    let posting = await PostingModel.find({ user_id: req.session.userSession.id });
+    let download = await DownloadModel.findOne({ email: req.session.userSession.email });
+    let downloadedPosting = await PostingModel.find().where('_id').in(download.postings_id).exec();
+
+    const public = searchArray.getObject(posting, 'posting_type', 'Public');
+    const private = searchArray.getObject(posting, 'posting_type', 'Private');
+
     res.render('page/library', {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'library',
       userSession: req.session.userSession ?? '',
+      public: public ?? [],
+      private: private ?? [],
+      download: downloadedPosting ?? [],
     });
   })
 
@@ -75,7 +89,7 @@ module.exports = (app) => {
 
 
   app.post('/upload', uploadFilePDF.single('document'), async (req, res) => {
-    const { title, description, category, posting_type } = req.body;
+    const { title, description, category, posting_type, source } = req.body;
     const userSession = req.session.userSession;
     const document_url = req.file.filename;
 
@@ -89,11 +103,13 @@ module.exports = (app) => {
     }
 
     const posting = new PostingModel({
+      user_id: userSession.id,
       user: userPosting,
       title,
       description,
       category,
       document_url,
+      source,
       posting_type,
       date_created: Date.now(),
     });
@@ -147,6 +163,15 @@ module.exports = (app) => {
     }
 
     const campuss = searchArray.getObject(Campuss, 'campuss_id', user.campuss_id)[0];
+    const download = await DownloadModel.findOne({ email: user.email });
+
+    var download_count = 0;
+
+    if (download !== null && download.postings_id !== null) {
+      download.postings_id.forEach(element => {
+        download_count++;
+      });
+    }
 
     const userSession = {
       id: user._id.toString(),
@@ -157,8 +182,8 @@ module.exports = (app) => {
       description: user.description,
       campuss_id: user.campuss_id,
       campuss_name: campuss.campuss_name,
-      download: 0,
-      privat: 0,
+      download: download_count,
+      private: 0,
       public: 0,
     };
     req.session.isAuth = true;
@@ -212,7 +237,7 @@ module.exports = (app) => {
       campuss_id: user.campuss_id,
       campuss_name: campuss.campuss_name,
       download: 0,
-      privat: 0,
+      private: 0,
       public: 0,
     };
     req.session.isAuth = true;
@@ -229,30 +254,33 @@ module.exports = (app) => {
 
   app.get('/document', async (req, res) => {
     let document = await PostingModel.findById(req.query.file);
+    const name = `${document.title}_share.doc_${Date.now()}.pdf`;
 
     if (document) {
-
-      res.download(`public/document/${document.document_url}`);
+      res.download(`public/document/${document.document_url}`, name);
       if (req.session.userSession !== null) {
-        const user = req.session.userSession;
-        let download = await DownloadModel.findOne({ user_id: user.id });
+        if (req.session.userSession.email !== document.email) {
+          const user = req.session.userSession;
+          let download = await DownloadModel.findOne({ email: user.email });
+          req.session.userSession.download++;
 
-        if (download !== null) {
-          await DownloadModel.findOneAndUpdate({ user_id: user.id }, {
-            $addToSet: {
-              postings_id: req.query.file,
-            }
-          });
-          return;
-        } else {
-          firstDownload = new DownloadModel({
-            user_id: user.id,
-            postings_id: [req.query.file],
-            date_created: Date.now(),
-            date_updated: Date.now(),
-          });
-          await firstDownload.save();
-          return;
+          if (download !== null) {
+            await DownloadModel.findOneAndUpdate({ email: user.email }, {
+              $addToSet: {
+                postings_id: req.query.file,
+              }
+            });
+            return;
+          } else {
+            firstDownload = new DownloadModel({
+              email: user.email,
+              postings_id: [req.query.file],
+              date_created: Date.now(),
+              date_updated: Date.now(),
+            });
+            await firstDownload.save();
+            return;
+          }
         }
       }
     } else {

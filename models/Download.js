@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const downloadSchema = new Schema({
-  user_id: {
+  email: {
     type: String,
     required: true,
   },

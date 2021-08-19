@@ -82,7 +82,13 @@
                         </p>
                       </div>
                       <div class="col-sm-4">
-                        <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
+                        <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i>
+                          <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
+                            , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
+                            <% const date=new Date(element.date_created) %>
+                              <%= date.getDay()%>
+                                <%= monthNames[date.getMonth()]%>
+                                  <%= date.getFullYear()%>
                         </p>
                       </div>
                     </div>

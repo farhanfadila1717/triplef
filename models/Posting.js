@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const postingSchema = new Schema({
+  user_id: {
+    type: String,
+    required: true,
+  },
   user: {
     name: {
       type: String,
@@ -49,6 +53,10 @@ const postingSchema = new Schema({
   posting_type: {
     type: String,
     default: "Public",
+  },
+  source: {
+    type: String,
+    default: "",
   },
   isRemoved: {
     type: Boolean,

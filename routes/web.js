@@ -7,7 +7,6 @@ const UserModel = require('../models/User');
 const Campuss = require('../models/Campus');
 const PostingModel = require('../models/Posting');
 const DownloadModel = require('../models/Download');
-const mongoose = require('mongoose');
 
 //// Import Sevices
 const uploadProfilePic = require('../services/upload_image');
@@ -17,11 +16,14 @@ const searchArray = require('../services/search_array');
 //// Import Middleware
 const AuthenticationMiddleware = require('../middleware/authentication');
 
+var done = true;
+
 
 module.exports = (app) => {
+
   app.get('/', async (req, res) => {
 
-    let posting = await PostingModel.find().sort({
+    let posting = await PostingModel.find({ posting_type: 'Public' }).sort({
       date_created: -1,
     });
 
@@ -39,7 +41,11 @@ module.exports = (app) => {
 
     let posting = await PostingModel.find({ user_id: req.session.userSession.id });
     let download = await DownloadModel.findOne({ email: req.session.userSession.email });
-    let downloadedPosting = await PostingModel.find().where('_id').in(download.postings_id).exec();
+    let downloadedPosting;
+
+    if (download !== null) {
+      downloadedPosting = await PostingModel.find().where('_id').in(download.postings_id).exec();
+    }
 
     const public = searchArray.getObject(posting, 'posting_type', 'Public');
     const private = searchArray.getObject(posting, 'posting_type', 'Private');
@@ -65,9 +71,12 @@ module.exports = (app) => {
     });
   })
 
-  app.get('/detail-university', (req, res) => {
+  app.get('/detail-university', async (req, res) => {
     const campuss_id = req.query.id ?? '111';
     const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
+    const posting = await PostingModel.find({ campuss_id, posting_type: 'Public' }).sort({
+      date_created: -1,
+    });
 
     res.render('page/detail-university', {
       layout: 'layout/main_layout',
@@ -75,6 +84,7 @@ module.exports = (app) => {
       page_name: 'university',
       campuss,
       userSession: req.session.userSession ?? '',
+      posting: posting ?? [],
     });
   });
 
@@ -97,13 +107,13 @@ module.exports = (app) => {
       name: userSession.name,
       email: userSession.email,
       profile_pic_url: userSession.profile_pic_url,
-      campuss_id: userSession.campuss_id,
       campuss_name: userSession.campuss_name,
       year: userSession.year,
     }
 
     const posting = new PostingModel({
       user_id: userSession.id,
+      campuss_id: userSession.campuss_id,
       user: userPosting,
       title,
       description,
@@ -258,12 +268,19 @@ module.exports = (app) => {
 
     if (document) {
       res.download(`public/document/${document.document_url}`, name);
+
       if (req.session.userSession !== null) {
-        if (req.session.userSession.email !== document.email) {
+        if (req.session.userSession.email !== document.user.email) {
           const user = req.session.userSession;
           let download = await DownloadModel.findOne({ email: user.email });
           req.session.userSession.download++;
-
+          if (done) {
+            await PostingModel.findByIdAndUpdate(req.query.file, { download_count: document.download_count + 1 });
+          }
+          done = false;
+          setTimeout(() => {
+            done = true;
+          }, 10000);
           if (download !== null) {
             await DownloadModel.findOneAndUpdate({ email: user.email }, {
               $addToSet: {
@@ -286,5 +303,9 @@ module.exports = (app) => {
     } else {
       res.redirect('/');
     }
+  });
+
+  app.get('*', (req, res) => {
+    res.status(404).send('What???');
   });
 }

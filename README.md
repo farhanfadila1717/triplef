@@ -29,7 +29,7 @@
 ---
 
 ### 🚧 Maintener
-| [![account avatar][]][github account] <br>|[![fandy avatar][]][fandy account] <br>|
+| [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|
 | :-----: |:-----: |
 |   **Farhan**  |**Fandy**|
 

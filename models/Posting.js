@@ -5,6 +5,10 @@ const postingSchema = new Schema({
     type: String,
     required: true,
   },
+  campuss_id: {
+    type: String,
+    default: "111",
+  },
   user: {
     name: {
       type: String,
@@ -16,10 +20,6 @@ const postingSchema = new Schema({
     },
     profile_pic_url: {
       type: String,
-    },
-    campuss_id: {
-      type: String,
-      default: "111",
     },
     campuss_name: {
       type: String,

@@ -6,15 +6,12 @@ const downloadSchema = new Schema({
     type: String,
     required: true,
   },
-  posting_id: {
-    type: String,
-    required: true,
-  },
+  postings_id: [String],
   date_created: {
     type: Number,
     default: 0,
   },
-  date_Updated: {
+  date_updated: {
     type: Number,
     default: 0,
   }

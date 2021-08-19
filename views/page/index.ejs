@@ -98,10 +98,10 @@
                   <p class="text-grey fs-14">
                     <%= element.description %>
                       <div class="downloader">
-                        <% const document_url=`/document/${element.document_url}` %>
+                        <% const document_url=`/document?file=${element._id}` %>
                           <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
 
-                          <a href=<%=document_url %> class="text-dark" target="_blank">Download</a>
+                          <a href=<%=document_url%> class="text-dark">Download</a>
 
                           <% if (element.download_count> 0) { %>
                             <span class="text-grey fs-14 ms-3">

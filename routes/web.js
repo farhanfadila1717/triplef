@@ -149,7 +149,7 @@ module.exports = (app) => {
     const campuss = searchArray.getObject(Campuss, 'campuss_id', user.campuss_id)[0];
 
     const userSession = {
-      id: user._id,
+      id: user._id.toString(),
       name: user.name,
       email: user.email,
       profile_pic_url: user.profile_pic_url,
@@ -203,7 +203,7 @@ module.exports = (app) => {
     const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
 
     const userSession = {
-      id: user._id,
+      id: user._id.toString(),
       name: user.name,
       year: user.year,
       email: user.email,
@@ -225,5 +225,38 @@ module.exports = (app) => {
       if (err) throw err;
       res.redirect("/login");
     });
+  });
+
+  app.get('/document', async (req, res) => {
+    let document = await PostingModel.findById(req.query.file);
+
+    if (document) {
+
+      res.download(`public/document/${document.document_url}`);
+      if (req.session.userSession !== null) {
+        const user = req.session.userSession;
+        let download = await DownloadModel.findOne({ user_id: user.id });
+
+        if (download !== null) {
+          await DownloadModel.findOneAndUpdate({ user_id: user.id }, {
+            $addToSet: {
+              postings_id: req.query.file,
+            }
+          });
+          return;
+        } else {
+          firstDownload = new DownloadModel({
+            user_id: user.id,
+            postings_id: [req.query.file],
+            date_created: Date.now(),
+            date_updated: Date.now(),
+          });
+          await firstDownload.save();
+          return;
+        }
+      }
+    } else {
+      res.redirect('/');
+    }
   });
 }

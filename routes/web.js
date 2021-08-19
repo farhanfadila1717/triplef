@@ -23,9 +23,13 @@ module.exports = (app) => {
 
   app.get('/', async (req, res) => {
 
-    let posting = await PostingModel.find({ posting_type: 'Public' }).sort({
+    let posting = await PostingModel.find({ posting_type: 'Public', isRemoved: false }).sort({
       date_created: -1,
     });
+
+    let popular = await PostingModel.find({ posting_type: 'Public', isRemoved: false }).sort({
+      download_count: -1,
+    }).limit(3);
 
     res.render('page/index', {
       layout: 'layout/main_layout',
@@ -34,17 +38,20 @@ module.exports = (app) => {
       campuss: Campuss.slice(0, 3),
       userSession: req.session.userSession ?? '',
       posting: posting ?? [],
+      popular: popular ?? [],
     });
   })
 
   app.get('/library', AuthenticationMiddleware.isAuth, async (req, res) => {
 
-    let posting = await PostingModel.find({ user_id: req.session.userSession.id });
+    let posting = await PostingModel.find({ user_id: req.session.userSession.id, isRemoved: false }).sort({
+      date_created: -1,
+    });
     let download = await DownloadModel.findOne({ email: req.session.userSession.email });
     let downloadedPosting;
 
     if (download !== null) {
-      downloadedPosting = await PostingModel.find().where('_id').in(download.postings_id).exec();
+      downloadedPosting = await PostingModel.find({ isRemoved: false }).where('_id').in(download.postings_id).exec();
     }
 
     const public = searchArray.getObject(posting, 'posting_type', 'Public');
@@ -132,8 +139,9 @@ module.exports = (app) => {
   app.get('/profile-mobile', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/profile-mobile', {
       layout: 'layout/main_layout',
-      title: appName,
-      page_name: 'profile-mobile',
+      title: "Profile",
+      page_name: 'Profile',
+      userSession: req.session.userSession ?? '',
     })
   })
 
@@ -255,7 +263,7 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.post('/logout', (req, res) => {
+  app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
       if (err) throw err;
       res.redirect("/login");
@@ -303,6 +311,12 @@ module.exports = (app) => {
     } else {
       res.redirect('/');
     }
+  });
+
+  app.get('/remove', async (req, res) => {
+    const id = req.query.id;
+    await PostingModel.findByIdAndUpdate(id, { isRemoved: true });
+    res.redirect('/library');
   });
 
   app.get('*', (req, res) => {

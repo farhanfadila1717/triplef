@@ -34,30 +34,19 @@
               </div>
               <hr>
               <div class="list">
-                <div class="row pb-3">
-                  <div class="col-8">
-                    <h6>Laporan Kegiatan HUT RI</h6>
+                <% popular.forEach(element=> { %>
+                  <div class="row pb-3">
+                    <div class="col-8">
+                      <h6>
+                        <%= element.title %>
+                      </h6>
+                    </div>
+                    <div class="col-4">
+                      <% const document_url=`/document?file=${element._id}` %>
+                        <a href=<%=document_url%> class="btn btn-sm btn-blue-dark">Download</a>
+                    </div>
                   </div>
-                  <div class="col-4">
-                    <a href="" class="btn btn-sm btn-blue-dark">Download</a>
-                  </div>
-                </div>
-                <div class="row pb-3">
-                  <div class="col-8">
-                    <h6 class="mt-2">Analisis nilai budaya yang ada di lingkungan sekolah</h6>
-                  </div>
-                  <div class="col-4">
-                    <a href="" class="btn btn-sm btn-blue-dark">Download</a>
-                  </div>
-                </div>
-                <div class="row pb-3">
-                  <div class="col-8">
-                    <h6 class="mt-2">Proposal kegiatan pelantikan</h6>
-                  </div>
-                  <div class="col-4">
-                    <a href="" class="btn btn-sm btn-blue-dark">Download</a>
-                  </div>
-                </div>
+                  <% }) %>
               </div>
             </div>
           </div>

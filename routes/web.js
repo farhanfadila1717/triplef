@@ -1,11 +1,12 @@
 //// ROUTING
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const appName = 'Share.doc';
 
 //// Import Models
 const UserModel = require('../models/User');
 const Campuss = require('../models/Campus');
+const PostingModel = require('../models/Posting');
+const DownloadModel = require('../models/Download');
 
 //// Import Sevices
 const uploadProfilePic = require('../services/upload_image');
@@ -17,14 +18,17 @@ const AuthenticationMiddleware = require('../middleware/authentication');
 
 
 module.exports = (app) => {
-  app.get('/', (req, res) => {
+  app.get('/', async (req, res) => {
+
+    let posting = await PostingModel.find();
+
     res.render('page/index', {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'home',
-      user: req.session.user ?? '',
       campuss: Campuss.slice(0, 3),
-      usercampuss: req.session.campuss ?? '',
+      userSession: req.session.userSession ?? '',
+      posting: posting ?? [],
     });
   })
 
@@ -33,8 +37,7 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'library',
-      user: req.session.user ?? '',
-      usercampuss: req.session.campuss ?? '',
+      userSession: req.session.userSession ?? '',
     });
   })
 
@@ -44,8 +47,7 @@ module.exports = (app) => {
       title: appName,
       page_name: 'university',
       campuss: Campuss,
-      user: req.session.user ?? '',
-      usercampuss: req.session.campuss ?? '',
+      userSession: req.session.userSession ?? '',
     });
   })
 
@@ -57,21 +59,49 @@ module.exports = (app) => {
       layout: 'layout/main_layout',
       title: appName,
       page_name: 'university',
-      user: req.session.user ?? '',
       campuss,
-      usercampuss: req.session.campuss ?? '',
+      userSession: req.session.userSession ?? '',
     });
-  })
+  });
 
   app.get('/upload', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/upload', {
       layout: 'layout/main_layout',
       title: 'Upload',
       page_name: 'upload',
-      user: req.session.user ?? '',
-      usercampuss: req.session.campuss ?? '',
-    })
-  })
+      userSession: req.session.userSession ?? '',
+    });
+  });
+
+
+  app.post('/upload', uploadFilePDF.single('document'), async (req, res) => {
+    const { title, description, category, posting_type } = req.body;
+    const userSession = req.session.userSession;
+    const document_url = req.file.filename;
+
+    const userPosting = {
+      name: userSession.name,
+      email: userSession.email,
+      profile_pic_url: userSession.profile_pic_url,
+      campuss_id: userSession.campuss_id,
+      campuss_name: userSession.campuss_name,
+      year: userSession.year,
+    }
+
+    const posting = new PostingModel({
+      user: userPosting,
+      title,
+      description,
+      category,
+      document_url,
+      posting_type,
+      date_created: Date.now(),
+    });
+
+    await posting.save();
+
+    res.redirect('/');
+  });
 
   app.get('/profile-mobile', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/profile-mobile', {
@@ -86,8 +116,7 @@ module.exports = (app) => {
       layout: 'layout/main_auth',
       title: appName,
       page_name: 'edit-profile',
-      user: req.session.user ?? '',
-      usercampuss: req.session.campuss ?? '',
+      userSession: req.session.userSession ?? '',
     })
   })
 
@@ -118,9 +147,22 @@ module.exports = (app) => {
     }
 
     const campuss = searchArray.getObject(Campuss, 'campuss_id', user.campuss_id)[0];
-    req.session.user = user;
+
+    const userSession = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      profile_pic_url: user.profile_pic_url,
+      year: user.year,
+      description: user.description,
+      campuss_id: user.campuss_id,
+      campuss_name: campuss.campuss_name,
+      download: 0,
+      privat: 0,
+      public: 0,
+    };
     req.session.isAuth = true;
-    req.session.campuss = campuss;
+    req.session.userSession = userSession;
 
     res.redirect('/');
   });
@@ -160,10 +202,21 @@ module.exports = (app) => {
     await user.save();
     const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
 
-    const data = { user, campuss };
+    const userSession = {
+      id: user._id,
+      name: user.name,
+      year: user.year,
+      email: user.email,
+      profile_pic_url: user.profile_pic_url,
+      description: user.description,
+      campuss_id: user.campuss_id,
+      campuss_name: campuss.campuss_name,
+      download: 0,
+      privat: 0,
+      public: 0,
+    };
     req.session.isAuth = true;
-    req.session.user = user;
-    req.session.campuss = campuss;
+    req.session.userSession = userSession;
     res.redirect('/');
   });
 

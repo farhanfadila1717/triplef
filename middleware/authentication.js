@@ -11,7 +11,7 @@ const isAuth = (req, res, next) => {
 }
 
 const isExisistingAuth = (req, res, next) => {
-  if (req.session.isAuth && req.session.user !== null) {
+  if (req.session.isAuth && req.session.userSession !== null) {
     return res.redirect('/');
   } else {
     return next();

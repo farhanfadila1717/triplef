@@ -1,16 +1,40 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const postingSchema = new Schema({
-  user_id: {
+  user: {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    profile_pic_url: {
+      type: String,
+    },
+    campuss_id: {
+      type: String,
+      default: "111",
+    },
+    campuss_name: {
+      type: String,
+      default: "",
+    },
+    year: {
+      type: Number,
+      default: 0,
+    },
+  },
+  title: {
     type: String,
     required: true,
   },
-  campus_id: {
-    type: Number,
+  description: {
+    type: String,
     required: true,
   },
-  text: {
+  category: {
     type: String,
     required: true,
   },
@@ -22,9 +46,9 @@ const postingSchema = new Schema({
     type: Number,
     default: 0,
   },
-  isPrivate: {
-    type: Boolean,
-    default: false,
+  posting_type: {
+    type: String,
+    default: "Public",
   },
   isRemoved: {
     type: Boolean,

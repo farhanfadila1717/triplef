@@ -63,161 +63,57 @@
           </div>
         </div>
         <div class="col-md-8">
-          <div class="box-white">
-            <div class="d-flex align-items-center">
-              <div class="flex-shrink-0">
-                <img src="/img/img-profile.png" class="img-profile-content" alt="">
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">Neelesh Chaudhary</h6>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="text-grey fs-14">Universitas Indraprasta (Angkatan 2020) </p>
+          <% if (posting !==null && posting.length> 0) { %>
+            <% posting.forEach(element=> { %>
+              <div class="box-white">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <% const image=`images/profile/${element.user.profile_pic_url}` %>
+                      <img src=<%=image %> class="img-profile-content" alt="">
                   </div>
-                  <div class="col-sm-4">
-                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="border-small">
-              <span class="badge bg-yellow text-white mb-3">Teknologi</span>
-              <h6>Proposal Kegiatan Sekolah</h6>
-              <p class="text-grey fs-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eligendi omnis quisquam laboriosam, dignissimos quos et atque natus praesentium, rem
-                molestiae eos, totam nemo laborum excepturi voluptate fuga dolorem temporibus magni!</p>
-              <div class="downloader">
-                <i class="mdi mdi-file-pdf text-danger fs-20"></i>
-                <a href="/document/dokumen.pdf" target="_blank" class="text-dark">Download</a>
-                <span class="text-grey fs-14 ms-3">50 downloader</span>
-              </div>
-            </div>
-          </div>
-          <div class="box-white">
-            <div class="d-flex align-items-center">
-              <div class="flex-shrink-0">
-                <img src="/img/img-profile.png" class="img-profile-content" alt="">
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">Neelesh Chaudhary</h6>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="text-grey fs-14">Universitas Indraprasta (Angkatan 2020) </p>
-                  </div>
-                  <div class="col-sm-4">
-                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
-                    </p>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">
+                      <%= element.user.name %>
+                    </h6>
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <p class="text-grey fs-14">
+                          <%= element.user.campuss_name %> (Angkatan <%= element.user.year %>)
+                        </p>
+                      </div>
+                      <div class="col-sm-4">
+                        <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="border-small">
-              <span class="badge bg-yellow text-white mb-3">Teknologi</span>
-              <h6>Proposal Kegiatan Sekolah</h6>
-              <p class="text-grey fs-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eligendi omnis quisquam laboriosam, dignissimos quos et atque natus praesentium, rem
-                molestiae eos, totam nemo laborum excepturi voluptate fuga dolorem temporibus magni!</p>
-              <div class="downloader">
-                <i class="mdi mdi-file-pdf text-danger fs-20"></i>
-                <a href="/document/dokumen.pdf" target="_blank" class="text-dark">Download</a>
-                <span class="text-grey fs-14 ms-3">50 downloader</span>
-              </div>
-            </div>
-          </div>
-          <div class="box-white">
-            <div class="d-flex align-items-center">
-              <div class="flex-shrink-0">
-                <img src="/img/img-profile.png" class="img-profile-content" alt="">
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">Neelesh Chaudhary</h6>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="text-grey fs-14">Universitas Indraprasta (Angkatan 2020) </p>
-                  </div>
-                  <div class="col-sm-4">
-                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
-                    </p>
-                  </div>
+                <div class="border-small">
+                  <span class="badge bg-yellow text-white mb-3">
+                    <%= element.category %>
+                  </span>
+                  <h6>
+                    <%= element.title %>
+                  </h6>
+                  <p class="text-grey fs-14">
+                    <%= element.description %>
+                      <div class="downloader">
+                        <% const document_url=`/document/${element.document_url}` %>
+                          <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                          <a href=<%=document_url %> class="text-dark" target="_blank">Download</a>
+
+                          <% if (element.download_count> 0) { %>
+                            <span class="text-grey fs-14 ms-3">
+                              <%= element.download_count %> download
+                            </span>
+                            <% } %>
+
+                      </div>
                 </div>
               </div>
-            </div>
-            <div class="border-small">
-              <span class="badge bg-yellow text-white mb-3">Teknologi</span>
-              <h6>Proposal Kegiatan Sekolah</h6>
-              <p class="text-grey fs-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eligendi omnis quisquam laboriosam, dignissimos quos et atque natus praesentium, rem
-                molestiae eos, totam nemo laborum excepturi voluptate fuga dolorem temporibus magni!</p>
-              <div class="downloader">
-                <i class="mdi mdi-file-pdf text-danger fs-20"></i>
-                <a href="/document/dokumen.pdf" target="_blank" class="text-dark">Download</a>
-                <span class="text-grey fs-14 ms-3">50 downloader</span>
-              </div>
-            </div>
-          </div>
-          <div class="box-white">
-            <div class="d-flex align-items-center">
-              <div class="flex-shrink-0">
-                <img src="/img/img-profile.png" class="img-profile-content" alt="">
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">Neelesh Chaudhary</h6>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="text-grey fs-14">Universitas Indraprasta (Angkatan 2020) </p>
-                  </div>
-                  <div class="col-sm-4">
-                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="border-small">
-              <span class="badge bg-yellow text-white mb-3">Teknologi</span>
-              <h6>Proposal Kegiatan Sekolah</h6>
-              <p class="text-grey fs-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eligendi omnis quisquam laboriosam, dignissimos quos et atque natus praesentium, rem
-                molestiae eos, totam nemo laborum excepturi voluptate fuga dolorem temporibus magni!</p>
-              <div class="downloader">
-                <i class="mdi mdi-file-pdf text-danger fs-20"></i>
-                <a href="/document/dokumen.pdf" target="_blank" class="text-dark">Download</a>
-                <span class="text-grey fs-14 ms-3">50 downloader</span>
-              </div>
-            </div>
-          </div>
-          <div class="box-white">
-            <div class="d-flex align-items-center">
-              <div class="flex-shrink-0">
-                <img src="/img/img-profile.png" class="img-profile-content" alt="">
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">Neelesh Chaudhary</h6>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <p class="text-grey fs-14">Universitas Indraprasta (Angkatan 2020) </p>
-                  </div>
-                  <div class="col-sm-4">
-                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i> 21 Januari 2020
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="border-small">
-              <span class="badge bg-yellow text-white mb-3">Teknologi</span>
-              <h6>Proposal Kegiatan Sekolah</h6>
-              <p class="text-grey fs-14">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Eligendi omnis quisquam laboriosam, dignissimos quos et atque natus praesentium, rem
-                molestiae eos, totam nemo laborum excepturi voluptate fuga dolorem temporibus magni!</p>
-              <div class="downloader">
-                <i class="mdi mdi-file-pdf text-danger fs-20"></i>
-                <a href="/document/dokumen.pdf" target="_blank" class="text-dark">Download</a>
-                <span class="text-grey fs-14 ms-3">50 downloader</span>
-              </div>
-            </div>
-          </div>
+              <% }) %>
+                <% } %>
         </div>
       </div>
     </div>

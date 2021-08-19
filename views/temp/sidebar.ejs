@@ -1,16 +1,16 @@
-<% if (user !==null && user !=='' ) { %>
+<% if (userSession !==null && userSession !=='' ) { %>
   <div class="sidebar d-none d-md-block">
     <div class="sidebar-wripper">
       <div class="mt-3">
         <div class="text-center">
-          <% const image=`images/profile/${user.profile_pic_url}` %>
+          <% const image=`images/profile/${userSession.profile_pic_url}` %>
             <img src=<%=image %>
             class="img-profile" alt="">
             <h5 class="fs-16 text-dark text-semibold mt-3 mb-0">
-              <%= user.name %>
+              <%= userSession.name %>
             </h5>
             <p class="text-grey fs-14">
-              <%= usercampuss.campuss_name ?? '' %> (<%= user.year %>)
+              <%= userSession.campuss_name ?? '' %> (<%= userSession.year %>)
             </p>
             <a href="/edit-profile" class="btn btn-blue-dark btn-sm w-25"> Edit </a>
         </div>
@@ -40,7 +40,7 @@
           Deskripsi
         </h6>
         <p class="text-grey fs-14 line-16">
-          <%= user.description %>
+          <%= userSession.description %>
         </p>
       </div>
       <div class="mt-5">

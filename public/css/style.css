@@ -326,6 +326,15 @@ label {
     color: #fff;
 }
 
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    color: #1B1D28;
+}
+
 .btn-outline-blue {
     color: #00008C;
     border: 1px solid #00008C;

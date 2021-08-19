@@ -35,7 +35,6 @@
 
 
  <br>
-📫 How to reach me: farhan.fadila1717@gmail.com
 
 [cover]: https://github.com/farhanfadila1717/triplef/blob/master/cover.png
 [account avatar]: https://avatars.githubusercontent.com/u/43161050?s=80

@@ -1,0 +1,90 @@
+<div class="my-4">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="fixed">
+          <div class="box-white">
+            <nav aria-label="breadcrumb mb-0">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/university" class="text-dark-blue">Universitas</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= campuss.campuss_name %>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div class="box-white">
+            <div class="text-center">
+              <% const image=`img/campuss/${campuss.image}` %>
+                <img src=<%=image %> class="img-univ" alt= <%= campuss.campuss_name %> >
+                  <h5 class="text-dark mt-3">
+                    <%= campuss.campuss_name %>
+                  </h5>
+                  <p class="text-grey">
+                    <%= posting.length %> Dokumen
+                  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <% posting.forEach(element=> { %>
+          <div class="box-white">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0">
+                <% const image=`images/profile/${element.user.profile_pic_url}` %>
+                  <img src=<%=image %> class="img-profile-content" alt="">
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">
+                  <%= element.user.name %>
+                </h6>
+                <div class="row">
+                  <div class="col-sm-8">
+                    <p class="text-grey fs-14">
+                      <%= element.user.campuss_name %> (Angkatan <%= element.user.year %>)
+                    </p>
+                  </div>
+                  <div class="col-sm-4">
+                    <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i>
+                      <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
+                        , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
+                        <% const date=new Date(element.date_created) %>
+                          <%= date.getDay()%>
+                            <%= monthNames[date.getMonth()]%>
+                              <%= date.getFullYear()%>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-small">
+              <span class="badge bg-yellow text-white mb-3">
+                <%= element.category %>
+              </span>
+              <h6>
+                <%= element.title %>
+              </h6>
+              <p class="text-grey fs-14">
+                <%= element.description %>
+                  <div class="downloader">
+                    <% const document_url=`/document?file=${element._id}` %>
+                      <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                      <a href=<%=document_url%> class="text-dark">Download</a>
+
+                      <% if (element.download_count> 0) { %>
+                        <span class="text-grey fs-14 ms-3">
+                          <%= element.download_count %> download
+                        </span>
+                        <% } %>
+
+                  </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+  </div>
+</div>

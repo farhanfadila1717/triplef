@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-light sticky-top justify-content-center">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex mr-auto" href="#"><img src="/img/logo.svg" alt=""></a>
+    <a href="/profile-mobile" class="float-right d-block d-md-none">
+      <% if (userSession !==null && userSession !=='' ) { %>
+        <% const image=`images/profile/${userSession.profile_pic_url}` %>
+          <img src=<%=image %> class="img-profile-mobile" alt="">
+          <% } %>
+    </a>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+      <ul class="navbar-nav w-100 justify-content-center">
+        <li class="nav-item <%= page_name === 'home' && 'active' %>">
+          <a class="nav-link" href="/" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home"><i
+              class="mdi mdi-home-outline"></i></a>
+        </li>
+        <li class="nav-item <%= page_name === 'library' && 'active' %>">
+          <a class="nav-link" href="/library" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Library"><i
+              class="mdi mdi-file-document-outline"></i></a>
+        </li>
+        <li class="nav-item <%= page_name === 'university' && 'active' %>">
+          <a class="nav-link" href="/university" data-bs-toggle="tooltip" data-bs-placement="bottom"
+            title="University"><i class="mdi mdi-school-outline"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- navbar mobile -->
+<ul class="nav justify-content-center navbar-mobile bg-white fixed-bottom shadow">
+  <li class="nav-item <%= page_name === 'home' && 'active' %>">
+    <a class="nav-link" href="/" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home"><i
+        class="mdi mdi-home-outline"></i></a>
+  </li>
+  <li class="nav-item <%= page_name === 'library' && 'active' %>">
+    <a class="nav-link" href="/library" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Library"><i
+        class="mdi mdi-file-document-outline"></i></a>
+  </li>
+  <li class="nav-item <%= page_name === 'university' && 'active' %>">
+    <a class="nav-link" href="/university" data-bs-toggle="tooltip" data-bs-placement="bottom" title="University"><i
+        class="mdi mdi-school-outline"></i></a>
+  </li>
+</ul>

@@ -1,0 +1,115 @@
+<%- include('../temp/button-add'); %>
+  <div class="my-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 d-none d-md-block">
+          <div class="fixed">
+            <div class="box-white">
+              <div class="title-box">
+                <h5>Kampus Ternama</h5>
+              </div>
+              <hr>
+              <div class="list">
+                <% campuss.forEach(element=> { %>
+                  <% const detail=`/detail-university?id=${element.campuss_id}` %>
+                    <a href=<%=detail %> class="text-dark text-decoration-none">
+                      <div class="row gx-2 pb-3">
+                        <div class="col-2">
+                          <% const image=`img/campuss/${element.image}` %>
+                            <img src=<%=image %> class="rounded-circle w-100" alt="">
+                        </div>
+                        <div class="col-10 mt-4 ml-2 center">
+                          <h6>
+                            <%= element.campuss_name %>
+                          </h6>
+                        </div>
+                      </div>
+                    </a>
+                    <% }) %>
+              </div>
+            </div>
+            <div class="box-white mb-5">
+              <div class="title-box">
+                <h5>Dokumen Terpopuler</h5>
+              </div>
+              <hr>
+              <div class="list">
+                <% popular.forEach(element=> { %>
+                  <div class="row pb-3">
+                    <div class="col-8">
+                      <h6>
+                        <%= element.title %>
+                      </h6>
+                    </div>
+                    <div class="col-4">
+                      <% const document_url=`/document?file=${element._id}` %>
+                        <a href=<%=document_url%> class="btn btn-sm btn-blue-dark">Download</a>
+                    </div>
+                  </div>
+                  <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <% if (posting !==null && posting.length> 0) { %>
+            <% posting.forEach(element=> { %>
+              <div class="box-white">
+                <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+                    <% const image=`images/profile/${element.user.profile_pic_url}` %>
+                      <img src=<%=image %> class="img-profile-content" alt="">
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">
+                      <%= element.user.name %>
+                    </h6>
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <p class="text-grey fs-14">
+                          <%= element.user.campuss_name %> (Angkatan <%= element.user.year %>)
+                        </p>
+                      </div>
+                      <div class="col-sm-4">
+                        <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i>
+                          <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
+                            , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
+                            <% const date=new Date(element.date_created) %>
+                              <%= date.getDay()%>
+                                <%= monthNames[date.getMonth()]%>
+                                  <%= date.getFullYear()%>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="border-small">
+                  <span class="badge bg-yellow text-white mb-3">
+                    <%= element.category %>
+                  </span>
+                  <h6>
+                    <%= element.title %>
+                  </h6>
+                  <p class="text-grey fs-14">
+                    <%= element.description %>
+                      <div class="downloader">
+                        <% const document_url=`/document?file=${element._id}` %>
+                          <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                          <a href=<%=document_url%> class="text-dark">Download</a>
+
+                          <% if (element.download_count> 0) { %>
+                            <span class="text-grey fs-14 ms-3">
+                              <%= element.download_count %> download
+                            </span>
+                            <% } %>
+
+                      </div>
+                </div>
+              </div>
+              <% }) %>
+                <% } %>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <%- include('../temp/css'); %>
+</head>
+
+<body>
+  <%- include('../temp/sidebar'); %>
+    <div class="content">
+      <%- include('../temp/navbar'); %>
+        <%- body %>
+    </div>
+</body>
+<%- include('../temp/main_js'); %>
+
+</html>

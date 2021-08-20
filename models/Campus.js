@@ -1,18 +1,28 @@
 const campuss = [
   {
-    "id_campus": 111,
-    "campus_name": "Universitas Indraprasta",
-    "image": "https://www.masukuniversitas.com/wp-content/uploads/2016/10/Biaya-Kuliah-Unindra-Universitas-Indraprasta-Terbaru.jpg"
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung",
+    "image": "itb.png"
   },
   {
-    "id_campus": 222,
-    "campus_name": "Universitas Indonesia",
-    "image": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/032012/untitled-1_157.png?itok=nidGlvYl"
+    "campuss_id": "222",
+    "campuss_name": "Universitas Indonesia",
+    "image": "ui.png"
   },
   {
-    "id_campus": 333,
-    "campus_name": "Universitas Gajah Mada",
-    "image": "https://upload.wikimedia.org/wikipedia/id/thumb/9/9f/Emblem_of_Universitas_Gadjah_Mada.svg/1200px-Emblem_of_Universitas_Gadjah_Mada.svg.png"
+    "campuss_id": "333",
+    "campuss_name": "Universitas Gajah Mada",
+    "image": "ugm.png"
+  },
+  {
+    "campuss_id": "444",
+    "campuss_name": "Institut Teknologi Sepuluh",
+    "image": "its.png"
+  },
+  {
+    "campuss_id": "555",
+    "campuss_name": "Institut Pertanian Bogor",
+    "image": "ipb.png"
   }
 ];
 

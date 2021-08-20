@@ -10,24 +10,34 @@
 
 ## How to install project
 * First instal requirement(Tech Stack) NodeJS, MongoDB.
+* Import database in folder db
 * Clone repository
   ```sh
     git clone https://github.com/farhanfadila1717/triplef
   ```
 * Open project with your favotite ❤️ IDE
+* Get node modules with [npm](https://www.npmjs.com/)
+  ```sh
+    npm i
+  ```
 * Run project with comand line with [nodemon](https://www.npmjs.com/package/nodemon)
   ```sh
     nodemon
   ```
-* And woala, this project run localhost port 500 ⚡
+* And done, this project run localhost port 5000 ⚡
 
 ---
 
-### 🚧 Maintener 
-[![account avatar][]][github account] <br>
-**Farhan Fadila** <br>
-📫 How to reach me: farhan.fadila1717@gmail.com
+### 🚧 Maintener
+| [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|
+| :-----: |:-----: |
+|   **Farhan**  |**Fandy**|
+
+
+ <br>
 
 [cover]: https://github.com/farhanfadila1717/triplef/blob/master/cover.png
 [account avatar]: https://avatars.githubusercontent.com/u/43161050?s=80
 [github account]: https://github.com/farhanfadila1717
+[fandy avatar]: https://avatars.githubusercontent.com/u/22866777?s=80
+[fandy account]: https://github.com/fandyramadhan

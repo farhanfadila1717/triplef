@@ -1,0 +1,173 @@
+<%- include('../temp/button-add'); %>
+  <div class="my-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box-white fixed">
+            <div class="nav nav-tabs flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
+              aria-orientation="vertical">
+              <button class="nav-link active" id="v-public-tab" data-bs-toggle="pill" data-bs-target="#v-public"
+                type="button" role="tab" aria-controls="v-public" aria-selected="true">
+                Public (<%=public.length%>)</button>
+              <button class="nav-link" id="v-pills-private-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
+                type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                Private (<%=private.length%>)</button>
+              <button class="nav-link" id="v-download-tab" data-bs-toggle="pill" data-bs-target="#v-download"
+                type="button" role="tab" aria-controls="v-download" aria-selected="false">
+                Download (<%=download.length%>)</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content" id="v-pills-tabContent">
+
+            <!-- public -->
+            <div class="tab-pane fade show active" id="v-public" role="tabpanel" aria-labelledby="v-public-tab">
+              <% public.forEach(element=> { %>
+                <div class="box-white">
+                  <span class="badge bg-yellow text-white mb-3">
+                    <%= element.category %>
+                  </span>
+                  <div class="float-end">
+                    <div class="dropdown">
+                      <a class="btn btn-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                        <li>
+                          <% const remove_url=`/remove?id=${element._id}` %>
+                            <a class="dropdown-item" href=<%=remove_url %> >Delete</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h6>
+                    <%= element.title %>
+                  </h6>
+                  <p class="text-grey fs-14">
+                    <%= element.description %>
+                  </p>
+                  <div class="downloader">
+                    <% const document_url=`/document?file=${element._id}` %>
+                      <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                      <a href=<%=document_url%> class="text-dark">Download</a>
+                      <% if (element.download_count> 0) { %>
+                        <span class="text-grey fs-14 ms-3">
+                          <%= element.download_count %> download
+                        </span>
+                        <% } %>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+
+            <!-- private -->
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-private-tab">
+              <% private.forEach(element=> { %>
+                <div class="box-white">
+                  <span class="badge bg-yellow text-white mb-3">
+                    <%= element.category %>
+                  </span>
+                  <div class="float-end">
+                    <div class="dropdown">
+                      <a class="btn btn-light" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                      </a>
+
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                        <li>
+                          <% const remove_url=`/remove?id=${element._id}` %>
+                            <a class="dropdown-item" href=<%=remove_url %> >Delete</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h6>
+                    <%= element.title %>
+                  </h6>
+                  <p class="text-grey fs-14">
+                    <%= element.description %>
+                  </p>
+                  <div class="downloader">
+                    <% const document_url=`/document?file=${element._id}` %>
+                      <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                      <a href=<%=document_url%> class="text-dark">Download</a>
+                      <% if (element.download_count> 0) { %>
+                        <span class="text-grey fs-14 ms-3">
+                          <%= element.download_count %> download
+                        </span>
+                        <% } %>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+
+            <!-- download -->
+            <div class="tab-pane fade" id="v-download" role="tabpanel" aria-labelledby="v-download-tab">
+              <% download.forEach(element=> { %>
+                <div class="box-white">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                      <% const image=`images/profile/${element.user.profile_pic_url}` %>
+                        <img src=<%=image %> class="img-profile-content" alt="">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h6 class="fs-16 text-dark text-semibold mt-3 mb-0">
+                        <%= element.user.name %>
+                      </h6>
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <p class="text-grey fs-14">
+                            <%= element.user.campuss_name %> (Angkatan
+                              <%= element.user.year %>)
+                          </p>
+                        </div>
+                        <div class="col-sm-4">
+                          <p class="text-grey fs-14"><i class="mdi mdi-calendar"></i>
+                            <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
+                              , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
+                              <% const date=new Date(element.date_created) %>
+                                <%= date.getDay()%>
+                                  <%= monthNames[date.getMonth()]%>
+                                    <%= date.getFullYear()%>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-small">
+                    <span class="badge bg-yellow text-white mb-3">
+                      <%= element.category %>
+                    </span>
+                    <h6>
+                      <%= element.title %>
+                    </h6>
+                    <p class="text-grey fs-14">
+                      <%= element.description %>
+                    </p>
+                    <div class="downloader">
+                      <% const document_url=`/document?file=${element._id}` %>
+                        <i class="mdi mdi-file-pdf text-danger fs-20 mr-1"></i>
+
+                        <a href=<%=document_url%> class="text-dark">Download</a>
+
+                        <% if (element.download_count> 0) { %>
+                          <span class="text-grey fs-14 ms-3">
+                            <%= element.download_count %> download
+                          </span>
+                          <% } %>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

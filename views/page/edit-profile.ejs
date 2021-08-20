@@ -1,0 +1,45 @@
+<div class="my-4">
+    <div class="container-fluid">
+        <form action="" method="post" enctype="multipart/form-data" class="pb-5">
+            <div class="row justify-content-center box-white">
+                <div class="col-md-8">
+                    <h3 class="text-center mb-5">Edit Profile</h3>
+                    <div class="form-group pb-3">
+                        <label class="form-label">Upload Foto</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="form-group pb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" maxlength="50" placeholder="Nama Lengkap .." required="" id="judul"
+                            class="form-control form-light" id="exampleInputName1">
+                    </div>
+                    <div class="form-group pb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" maxlength="50" placeholder="Email Anda .." required=""
+                            class="form-control form-light" id="exampleInputName1">
+                    </div>
+                    <div class="form-group pb-3">
+                        <label class="form-label">Universitas</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Pilih Universitas</option>
+                            <option value="Universitas Indraprasta PGRI">Universitas Indraprasta PGRI</option>
+                            <option value="Universitas Indonesia">Universitas Indonesia</option>
+                            <option value="Universitas Gadjah Mada">Universitas Gadjah Mada</option>
+                        </select>
+                    </div>
+                    <div class="form-group pb-3">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea name="deskripsi" id="deskripsi" rows="5" placeholder="Tulis deskripsi disini .."
+                            class="form-control form-light"></textarea>
+                    </div>
+                    <hr>
+                    <div class="float-end">
+                        <button type="button" onclick="window.history.back()" class="btn btn-light mr-3"> Cancel
+                        </button>
+                        <button class="btn btn-blue-dark" type="submit" id="submitbtn"> Simpan </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

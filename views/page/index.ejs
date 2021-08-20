@@ -75,7 +75,7 @@
                           <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
                             , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
                             <% const date=new Date(element.date_created) %>
-                              <%= date.getDay()%>
+                              <%= date.getUTCDate()%>
                                 <%= monthNames[date.getMonth()]%>
                                   <%= date.getFullYear()%>
                         </p>

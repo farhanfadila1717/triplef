@@ -20,9 +20,7 @@ var done = true;
 
 
 module.exports = (app) => {
-
   app.get('/', async (req, res) => {
-
     let posting = await PostingModel.find({ posting_type: 'Public', isRemoved: false }).sort({
       date_created: -1,
     });
@@ -40,7 +38,7 @@ module.exports = (app) => {
       posting: posting ?? [],
       popular: popular ?? [],
     });
-  })
+  });
 
   app.get('/library', AuthenticationMiddleware.isAuth, async (req, res) => {
 
@@ -66,7 +64,7 @@ module.exports = (app) => {
       private: private ?? [],
       download: downloadedPosting ?? [],
     });
-  })
+  });
 
   app.get('/university', (req, res) => {
     res.render('page/university', {
@@ -142,8 +140,8 @@ module.exports = (app) => {
       title: "Profile",
       page_name: 'Profile',
       userSession: req.session.userSession ?? '',
-    })
-  })
+    });
+  });
 
   app.get('/edit-profile', AuthenticationMiddleware.isAuth, (req, res) => {
     res.render('page/edit-profile', {
@@ -151,8 +149,9 @@ module.exports = (app) => {
       title: appName,
       page_name: 'edit-profile',
       userSession: req.session.userSession ?? '',
-    })
-  })
+      campuss: Campuss,
+    });
+  });
 
   app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
     const message = req.query.message ?? '';
@@ -210,7 +209,7 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.get('/register', (req, res) => {
+  app.get('/register', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
     res.render('register', {
       layout: 'layout/main_auth',
       title: 'Register',
@@ -263,7 +262,7 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.get('/logout', (req, res) => {
+  app.get('/logout', AuthenticationMiddleware.isAuth, (req, res) => {
     req.session.destroy((err) => {
       if (err) throw err;
       res.redirect("/login");

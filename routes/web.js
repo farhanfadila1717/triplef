@@ -157,20 +157,25 @@ module.exports = (app) => {
     var objForUpdate = {}
     const { name, year, description, campuss_id } = req.body;
 
-    if (name) objForUpdate.name = name;
-    if (year) objForUpdate.year = year;
-    if (description) objForUpdate.description = description;
-    if (campuss_id) objForUpdate.campuss_id = campuss_id;
+
+    if (name && name !== req.session.userSession.name) objForUpdate.name = name;
+    if (year && parseInt(year) !== req.session.userSession.year) objForUpdate.year = year;
+    if (description && description !== req.session.userSession.description) objForUpdate.description = description;
+    if (campuss_id && campuss_id !== req.session.userSession.campuss_name) objForUpdate.campuss_id = campuss_id;
 
     try { if (req.file.filename !== null) objForUpdate.profile_pic_url = req.file.filename; } catch (e) { }
 
-    console.log(objForUpdate);
 
-    let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);
+    if (Object.keys(objForUpdate).length > 0) {
+      let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);
 
-    if (user) {
-      res.redirect('/');
+      if (user) {
+        return res.redirect('/');
+      }
     }
+
+    res.redirect('/edit-profile');
+
   });
 
   app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {

@@ -18,6 +18,9 @@ const uploadProfilePic = multer({
   storage: fileStorage,
   fileFilter: (req, file, cb) => {
     UploadMiddleware.checkFileType(file, cb, /jpeg|jpg|png|gif/);
+  },
+  onError: (err, cb) => {
+    cb(err);
   }
 });
 

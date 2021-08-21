@@ -1,49 +1,60 @@
 <div class="my-4">
   <div class="container-fluid">
-    <form action="" method="post" enctype="multipart/form-data" class="pb-5">
+    <form action="/edit-profile" method="post" enctype="multipart/form-data" class="pb-5">
       <div class="row justify-content-center box-white">
         <div class="col-md-8">
           <h3 class="text-center mb-5">Edit Profile</h3>
           <div class="form-group pb-3">
             <label class="form-label">Nama Lengkap</label>
-            <input type="text" maxlength="50" placeholder=<%=userSession.name %> required=
-            <%=userSession.name %> id="judul"
-              class="form-control form-light" id="exampleInputName1">
+            <input type="text" name="name" maxlength="50" placeholder=<%=userSession.name %>id="judul"
+            class="form-control form-light" id="exampleInputName1">
           </div>
           <div class="form-group pb-3">
-            <label class="form-label">Upload Foto</label>
-            <input class="form-control" type="file" id="formFile">
+            <label class="form-label">Upload foto profile</label>
+            <input class="form-control" type="file" id="formFile" name="profile_pic">
           </div>
           <div class="form-group pb-3">
             <label class="form-label">Universitas</label>
-            <select class="form-select form-light" aria-label="Default select example" name="campuss_id" required="">
-              <option selected>Pilih Universitas</option>
+            <select class="form-select form-light" aria-label="Default select example" name="campuss_id">
+              <option selected>
+                <%= userSession.campuss_name %>
+              </option>
               <% for( let i=0; i < campuss.length; i++ ) { %>
                 <option value=<%=campuss[i].campuss_id %>> <%= campuss[i].campuss_name %>
+                    &nbsp;
+                    <% if (userSession.campuss_id===campuss[i].campuss_id ) { %>
+                      [Saat ini]
+                      <% } %>
                 </option>
                 <% } %>
             </select>
           </div>
           <div class="form-group pb-3">
             <label class="form-label">Angkatan</label>
-            <select class="form-select form-light" aria-label="Default select example" name="year" required="">
-              <option selected>Pilih tahun</option>
+            <select class="form-select form-light" aria-label="Default select example" name="year">
+              <option selected>
+                <%= userSession.year %>
+              </option>
               <% for( let i=30; i> 0; i-- ) { %>
                 <% const year=2022 - i %>
-                  <option value=<%=year %>> <%= year %>
+                  <option value=<%=year %>> <%= year %>&nbsp;
+                      <% if (userSession.year===year ) { %>
+                        [Saat ini]
+                        <% } %>
                   </option>
                   <% } %>
             </select>
           </div>
           <div class="form-group pb-3">
             <label class="form-label">Deskripsi</label>
-            <textarea name="deskripsi" id="deskripsi" rows="5" placeholder="Tulis deskripsi disini .."
+            <textarea name="description" id="deskripsi" rows="5" placeholder=<%=userSession.description %>
               class="form-control form-light"></textarea>
           </div>
           <hr>
           <div class="float-end">
             <button type="button" onclick="window.history.back()" class="btn btn-light mr-3"> Cancel
             </button>
+            &nbsp;
             <button class="btn btn-blue-dark" type="submit" id="submitbtn"> Simpan </button>
           </div>
         </div>

@@ -153,6 +153,26 @@ module.exports = (app) => {
     });
   });
 
+  app.post('/edit-profile', uploadProfilePic.single('profile_pic'), async (req, res) => {
+    var objForUpdate = {}
+    const { name, year, description, campuss_id } = req.body;
+
+    if (name) objForUpdate.name = name;
+    if (year) objForUpdate.year = year;
+    if (description) objForUpdate.description = description;
+    if (campuss_id) objForUpdate.campuss_id = campuss_id;
+
+    try { if (req.file.filename !== null) objForUpdate.profile_pic_url = req.file.filename; } catch (e) { }
+
+    console.log(objForUpdate);
+
+    let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);
+
+    if (user) {
+      res.redirect('/');
+    }
+  });
+
   app.get('/login', AuthenticationMiddleware.isExisistingAuth, (req, res) => {
     const message = req.query.message ?? '';
 

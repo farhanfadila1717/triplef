@@ -1,5 +1,6 @@
-//// ROUTING
+//// INJECT
 const bcrypt = require('bcryptjs');
+const audit = require('audit');
 const appName = 'Share.doc';
 
 //// Import Models
@@ -154,21 +155,45 @@ module.exports = (app) => {
   });
 
   app.post('/edit-profile', uploadProfilePic.single('profile_pic'), async (req, res) => {
-    var objForUpdate = {}
+    var objForUpdate = {};
+    var objPostUpdate = {};
     const { name, year, description, campuss_id } = req.body;
 
 
-    if (name && name !== req.session.userSession.name) objForUpdate.name = name;
-    if (year && parseInt(year) !== req.session.userSession.year) objForUpdate.year = year;
-    if (description && description !== req.session.userSession.description) objForUpdate.description = description;
-    if (campuss_id && campuss_id !== req.session.userSession.campuss_name) objForUpdate.campuss_id = campuss_id;
+    if (name && name !== req.session.userSession.name) {
+      objForUpdate.name = name;
+      objPostUpdate.name = name;
+      req.session.userSession.name = name;
+    };
+    if (year && parseInt(year) !== req.session.userSession.year) {
+      objForUpdate.year = year;
+      objPostUpdate.year = year;
+      req.session.userSession.year = year;
+    };
+    if (description && description !== req.session.userSession.description) {
+      objForUpdate.description = description;
+      req.session.userSession.description = description;
+    }
+    if (campuss_id && campuss_id !== req.session.userSession.campuss_name && campuss_id !== req.session.userSession.campuss_id) {
+      objForUpdate.campuss_id = campuss_id;
+      const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
+      req.session.userSession.campuss_name = campuss.campuss_name;
+      objPostUpdate.campuss_name = campuss.campuss_name;
+      req.session.userSession.campuss_id = campuss_id;
+    };
 
-    try { if (req.file.filename !== null) objForUpdate.profile_pic_url = req.file.filename; } catch (e) { }
+    try {
+      if (req.file.filename !== null) {
+        objForUpdate.profile_pic_url = req.file.filename;
+        req.session.userSession.profile_pic_url = req.file.filename;
+        objPostUpdate.profile_pic_url = req.file.filename;
+      }
+    } catch (e) { }
 
-
+    console.log(objForUpdate);
     if (Object.keys(objForUpdate).length > 0) {
       let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);
-
+      await PostingModel.updateMany({ user_id: req.session.userSession.id }, { $set: { user: objPostUpdate } });
       if (user) {
         return res.redirect('/');
       }

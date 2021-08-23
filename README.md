@@ -71,4 +71,3 @@ Jika ada kesulitan menjalankan projek bisa hubungi kami atau ketua kami [Fuad][f
 [fuad avatar]: https://avatars.githubusercontent.com/u/89235793?s=80
 [fuad account]: https://github.com/Fuadzulyansah
 [fuad wa]: https://wa.me/+6285715658268
-[import]: 

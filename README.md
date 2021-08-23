@@ -20,7 +20,8 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
   ```sh
     git clone https://github.com/farhanfadila1717/triplef
   ```
-* Mengimpor semua collection untuk mongoDB dari folder [collection](https://github.com/farhanfadila1717/triplef/tree/master/collection), dan dengan nama database `triplef` <br>
+* Mengimpor semua collection untuk mongoDB dari folder [collection](https://github.com/farhanfadila1717/triplef/tree/master/collection), dan dengan nama database `triplef`.<br> 
+[Cara import mongoDB dengan compass](https://docs.mongodb.com/compass/current/import-export/#import-data-into-a-collection) <br>
   ⚠️ Mohon untuk memberi nama database, dan collection sesuai gambar dibawah ini!<br><br>
   [![db rules][]][db rules]
   
@@ -51,6 +52,8 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 ### ☎️ Contact
 Jika ada kesulitan menjalankan projek bisa hubungi kami atau ketua kami [Fuad][fuad wa]
 
+---
+
 ### 👾 Team Kami
 | [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|[![fuad avatar][]][fuad account]|
 | :-----: |:-----: |:-----: |
@@ -68,3 +71,4 @@ Jika ada kesulitan menjalankan projek bisa hubungi kami atau ketua kami [Fuad][f
 [fuad avatar]: https://avatars.githubusercontent.com/u/89235793?s=80
 [fuad account]: https://github.com/Fuadzulyansah
 [fuad wa]: https://wa.me/+6285715658268
+[import]: 

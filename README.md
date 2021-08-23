@@ -1,5 +1,11 @@
 ## [![cover][]][cover]
 
+# Share.doc
+**#Nikmati indahnya berbagi dokumen.**<br>
+Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, bergabung bersama kami untuk menikmati indahnya berbagi.
+
+---
+
 ## Teknologi yang kami gunakan
 * [Node JS](https://nodejs.org/en/)
 * [Mongo DB](https://www.mongodb.com/try/download/community)

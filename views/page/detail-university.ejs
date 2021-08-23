@@ -43,7 +43,7 @@
                 <div class="row">
                   <div class="col-sm-8">
                     <p class="text-grey fs-14">
-                      <%= element.user.campuss_name %> (Angkatan <%= element.user.year %>)
+                      <%= element.campuss.campuss_name %> (Angkatan <%= element.user.year %>)
                     </p>
                   </div>
                   <div class="col-sm-4">
@@ -51,7 +51,7 @@
                       <% const monthNames=["Januarri", "Febuari" , "Maret" , "April" , "Mai" , "Juni" , "Juli"
                         , "Agustus" , "September" , "Oktober" , "November" , "Desember" ]; %>
                         <% const date=new Date(element.date_created) %>
-                          <%= date.getDay()%>
+                          <%= date.getUTCDate()%>
                             <%= monthNames[date.getMonth()]%>
                               <%= date.getFullYear()%>
                     </p>

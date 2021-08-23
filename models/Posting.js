@@ -1,34 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const postingSchema = new Schema({
-  user_id: {
+  email: {
     type: String,
     required: true,
   },
-  campuss_id: {
-    type: String,
-    default: "111",
-  },
-  user: {
-    name: {
+  campuss: {
+    campuss_id: {
       type: String,
       required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    profile_pic_url: {
-      type: String,
+
     },
     campuss_name: {
       type: String,
-      default: "",
-    },
-    year: {
-      type: Number,
-      default: 0,
-    },
+      required: true,
+    }
   },
   title: {
     type: String,

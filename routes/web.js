@@ -1,6 +1,7 @@
 //// INJECT
 const bcrypt = require('bcryptjs');
-const audit = require('audit');
+const mongoose = require('mongoose');
+const fs = require('fs');
 const appName = 'Share.doc';
 
 //// Import Models
@@ -22,39 +23,83 @@ var done = true;
 
 module.exports = (app) => {
   app.get('/', async (req, res) => {
-    let posting = await PostingModel.find({ posting_type: 'Public', isRemoved: false }).sort({
-      date_created: -1,
-    });
+
 
     let popular = await PostingModel.find({ posting_type: 'Public', isRemoved: false }).sort({
       download_count: -1,
     }).limit(3);
 
-    res.render('page/index', {
-      layout: 'layout/main_layout',
-      title: appName,
-      page_name: 'home',
-      campuss: Campuss.slice(0, 3),
-      userSession: req.session.userSession ?? '',
-      posting: posting ?? [],
-      popular: popular ?? [],
-    });
+    if (req.session.isAuth !== null && req.session.isAuth) {
+      let posting = await PostingModel.aggregate([
+        { "$match": { "posting_type": "Public", "isRemoved": false } },
+        { "$sort": { "date_created": -1, "download_count": -1 } },
+        {
+          "$lookup": {
+            "from": "users",
+            "localField": "email",
+            "foreignField": "email",
+            "as": "user",
+          },
+        },
+        {
+          $set: {
+            user: {
+              $arrayElemAt: ["$user", 0]
+            }
+          }
+        }
+      ]);
+      return res.render('page/index', {
+        layout: 'layout/main_layout',
+        title: appName,
+        page_name: 'home',
+        campuss: Campuss.slice(0, 3),
+        userSession: req.session.userSession ?? '',
+        posting: posting ?? [],
+        popular: popular ?? [],
+      });
+    } else {
+      return res.send('Landing Page');
+    }
   });
 
   app.get('/library', AuthenticationMiddleware.isAuth, async (req, res) => {
 
-    let posting = await PostingModel.find({ user_id: req.session.userSession.id, isRemoved: false }).sort({
-      date_created: -1,
-    });
+    let posting = await PostingModel.aggregate([
+      { "$match": { "isRemoved": false, "email": req.session.userSession.email } },
+    ]);
+
+
     let download = await DownloadModel.findOne({ email: req.session.userSession.email });
     let downloadedPosting;
 
     if (download !== null) {
-      downloadedPosting = await PostingModel.find({ isRemoved: false }).where('_id').in(download.postings_id).exec();
+      ids = download.postings_id.map(function (el) { return mongoose.Types.ObjectId(el) });
+      downloadedPosting = await PostingModel.aggregate([
+        { "$match": { "posting_type": "Public", "isRemoved": false, "_id": { "$in": ids } } },
+        { "$sort": { "date_created": -1 } },
+        {
+          "$lookup": {
+            "from": "users",
+            "localField": "email",
+            "foreignField": "email",
+            "as": "user",
+          },
+        },
+        {
+          $set: {
+            user: {
+              $arrayElemAt: ["$user", 0]
+            }
+          }
+        }
+      ]);
     }
 
     const public = searchArray.getObject(posting, 'posting_type', 'Public');
     const private = searchArray.getObject(posting, 'posting_type', 'Private');
+
+
 
     res.render('page/library', {
       layout: 'layout/main_layout',
@@ -80,13 +125,29 @@ module.exports = (app) => {
   app.get('/detail-university', async (req, res) => {
     const campuss_id = req.query.id ?? '111';
     const campuss = searchArray.getObject(Campuss, 'campuss_id', campuss_id)[0];
-    const posting = await PostingModel.find({ campuss_id, posting_type: 'Public' }).sort({
-      date_created: -1,
-    });
+    const posting = await PostingModel.aggregate([
+      { "$match": { "posting_type": "Public", "isRemoved": false, "campuss.campuss_id": campuss_id } },
+      { "$sort": { "date_created": -1 } },
+      {
+        "$lookup": {
+          "from": "users",
+          "localField": "email",
+          "foreignField": "email",
+          "as": "user",
+        },
+      },
+      {
+        $set: {
+          user: {
+            $arrayElemAt: ["$user", 0]
+          }
+        }
+      }
+    ]);
 
     res.render('page/detail-university', {
       layout: 'layout/main_layout',
-      title: appName,
+      title: campuss.campuss_name,
       page_name: 'university',
       campuss,
       userSession: req.session.userSession ?? '',
@@ -109,18 +170,12 @@ module.exports = (app) => {
     const userSession = req.session.userSession;
     const document_url = req.file.filename;
 
-    const userPosting = {
-      name: userSession.name,
-      email: userSession.email,
-      profile_pic_url: userSession.profile_pic_url,
-      campuss_name: userSession.campuss_name,
-      year: userSession.year,
-    }
-
     const posting = new PostingModel({
-      user_id: userSession.id,
-      campuss_id: userSession.campuss_id,
-      user: userPosting,
+      email: userSession.email,
+      campuss: {
+        campuss_id: userSession.campuss_id,
+        campuss_name: userSession.campuss_name,
+      },
       title,
       description,
       category,
@@ -132,7 +187,11 @@ module.exports = (app) => {
 
     await posting.save();
 
-    res.redirect('/');
+    if (posting_type == 'Private') {
+      res.redirect('/library');
+    } else {
+      res.redirect('/');
+    }
   });
 
   app.get('/profile-mobile', AuthenticationMiddleware.isAuth, (req, res) => {
@@ -188,12 +247,10 @@ module.exports = (app) => {
         req.session.userSession.profile_pic_url = req.file.filename;
         objPostUpdate.profile_pic_url = req.file.filename;
       }
-    } catch (e) { }
+    } catch (e) { console.log(e) }
 
-    console.log(objForUpdate);
     if (Object.keys(objForUpdate).length > 0) {
       let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);
-      await PostingModel.updateMany({ user_id: req.session.userSession.id }, { $set: { user: objPostUpdate } });
       if (user) {
         return res.redirect('/');
       }
@@ -216,7 +273,7 @@ module.exports = (app) => {
   app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    let user = await UserModel.findOne({ email });
+    let user = await UserModel.findOne({ email }).select("+password");
 
     if (!user) {
       const message = encodeURIComponent('Email tidak terdaftar');
@@ -327,7 +384,7 @@ module.exports = (app) => {
       res.download(`public/document/${document.document_url}`, name);
 
       if (req.session.userSession !== null) {
-        if (req.session.userSession.email !== document.user.email) {
+        if (req.session.userSession.email !== document.email) {
           const user = req.session.userSession;
           let download = await DownloadModel.findOne({ email: user.email });
           req.session.userSession.download++;

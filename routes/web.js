@@ -251,7 +251,7 @@ module.exports = (app) => {
         req.session.userSession.profile_pic_url = req.file.filename;
         objPostUpdate.profile_pic_url = req.file.filename;
       }
-    } catch (e) { console.log(e) }
+    } catch (e) { }
 
     if (Object.keys(objForUpdate).length > 0) {
       let user = await UserModel.findByIdAndUpdate(req.session.userSession.id, objForUpdate);

@@ -1,3 +1,12 @@
+<div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
 <div class="container my-5">
     <div class="row m-1 m-md-5 mt-5 mt-md-0 no-gutters shadow-lg">
         <div class="col-md-7 position-relative d-none d-md-block">
@@ -12,16 +21,16 @@
             <p class="fs-14 text-grey mb-5">Terimakasih telah kembali pada Share.doc, silahkan masuk dan saling berbagi
                 dokumen.</p>
             <div class="form-style">
-                <form>
+                <form action="/login" method="POST">
                     <div class="form-group pb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" placeholder="Masukkan Email ..." required="" class="form-control form-light"
-                            id="exampleInputName1">
+                        <input type="email" placeholder="Masukkan Email ..." class="form-control form-light"
+                            id="exampleInputName1" name="email">
                     </div>
                     <div class="form-group pb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" placeholder="Masukkan Password ..." required=""
-                            class="form-control form-light" id="exampleInputName1">
+                        <input type="password" placeholder="Masukkan Password ..." class="form-control form-light"
+                            id="exampleInputName1" name="password">
                         <a href="" class="fs-14 form-text text-blue-dark text-right">Lupa
                             password?</a>
                     </div>

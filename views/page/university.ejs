@@ -1,72 +1,22 @@
 <div class="my-4">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/detail-university" class="text-decoration-none">
-                    <div class="box-white hover-shadow">
-                        <div class="text-center">
-                            <img src="/img/campus/campus-1.png" class="img-univ" alt="">
-                            <h5 class="text-dark mt-3">Universitas Gadjah Mada</h5>
-                            <p class="text-grey"> 20 Dokumen </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <% campuss.forEach(element=> { %>
+        <div class="col-md-4">
+          <% const detail=`/detail-university?id=${element.campuss_id}` %>
+            <a href=<%=detail %> class="text-decoration-none">
+              <div class="box-white hover-shadow p-5">
+                <div class="text-center">
+                  <% const image=`img/campuss/${element.image}` %>
+                    <img src=<%=image %> class="img-univ" alt="">
+                    <h5 class="text-dark mt-3">
+                      <%= element.campuss_name %>
+                    </h5>
+                </div>
+              </div>
+            </a>
         </div>
+        <% }) %>
     </div>
+  </div>
 </div>

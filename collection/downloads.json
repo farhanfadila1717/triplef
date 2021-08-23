@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "6122e119545dd41dacefc53a"
+  },
+  "postings_id": [
+    "6122de7091c15129800f4888",
+    "6122d9a858323a33d41db27c",
+    "6122d87858323a33d41db276"
+  ],
+  "date_created": 1629675801642,
+  "date_updated": 1629675801642,
+  "email": "fandy@gmail.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61231bf28910aa19b4dbc26c"
+  },
+  "postings_id": [
+    "61231897112d172a5c2ad74a"
+  ],
+  "date_created": 1629690866783,
+  "date_updated": 1629690866783,
+  "email": "farhan.fadila1717@gmail.com",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61238cd2162182119c4e6090"
+  },
+  "postings_id": [
+    "61237c4d67784d3494b91a92"
+  ],
+  "date_created": 1629719762612,
+  "date_updated": 1629719762612,
+  "email": "antonius@gmail.com",
+  "__v": 0
+}]

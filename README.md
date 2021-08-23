@@ -34,7 +34,18 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
   ```
 * dan selesai, projek ini berjalan di port 5000 ⚡
 
+### Akun Dummy
+* Email
+```sh
+    antonius@gmail.com
+```
+* Password
+```sh
+    antonius
+```
+
 ---
+
 
 ### 👾 Team Kami
 | [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|[![fuad avatar][]][fuad account]|

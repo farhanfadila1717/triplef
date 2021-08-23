@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "6122d87858323a33d41db276"
+  },
+  "download_count": 1,
+  "posting_type": "Public",
+  "source": "https://www.halodoc.com/kesehatan/kesehatan-mental",
+  "isRemoved": false,
+  "date_created": 1629673592395,
+  "email": "farhan.fadila1717@gmail.com",
+  "campuss": {
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung"
+  },
+  "title": "Kesehatan mental",
+  "description": "Beberapa jenis gangguan mental yang umum ditemukan, antara lain depresi, gangguan bipolar, kecemasan, gangguan stres pasca trauma (PTSD), gangguan obsesif kompulsif (OCD), dan psikosis. Beberapa penyakit mental hanya terjadi pada jenis pengidap tertentu, seperti postpartum depression hanya menyerang ibu setelah melahirkan.",
+  "category": "Kedokteran",
+  "document_url": "1629673592384---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6122d9a858323a33d41db27c"
+  },
+  "download_count": 2,
+  "posting_type": "Public",
+  "source": "http://repository.usu.ac.id/bitstream/handle/123456789/16045/08E00009.pdf?sequence=2",
+  "isRemoved": false,
+  "date_created": 1629673896119,
+  "email": "farhan.fadila1717@gmail.com",
+  "campuss": {
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung"
+  },
+  "title": "Sejarah ilmu kedokteran",
+  "description": "Ilmu Kedokteran sendiri semakin lama semakin berkembang pada berbagai belahan dunia lainnya seperti di Tiongkok Kuno, India Kuno, Persia, Yunani Kuno, serta Mesir kuno. Sekitar abad ke 14 lah Ilmu Kedokteran mulai memasuki era baru, karena dilakukan pendekatan terhadap Sains. Hal ini tentu saja menuai pro kontra, karena tidak semua ilmuwan bisa menerima berbagai fakta tentang pendekatan Ilmu Kedokteran dengan Sains.",
+  "category": "Kedokteran",
+  "document_url": "1629673896078---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6122dd4e6e0853183c4a7e47"
+  },
+  "download_count": 0,
+  "posting_type": "Private",
+  "source": "",
+  "isRemoved": false,
+  "date_created": 1629674830211,
+  "email": "farhan.fadila1717@gmail.com",
+  "campuss": {
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung"
+  },
+  "title": "Kode etik kedokteran",
+  "description": "Kode Etik Kedokteran Indonesia (KODEKI) merupakan kumpulan norma untuk menuntun dokter di Indonesia selaku kelompok profesi berpraktik di masyarakat. Kasus kelalaian medik atau malpraktek sejak tahun 2006-2012 tercatat ada 182 kasus yang terbukti dilakukan dokter di seluruh Indonesia. ",
+  "category": "Kedokteran",
+  "document_url": "1629674830190---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6122de7091c15129800f4888"
+  },
+  "download_count": 1,
+  "posting_type": "Public",
+  "source": "http://download.garuda.ristekdikti.go.id/article.php?article=994519&val=15182&title=KELELAHAN%20DAN%20RECOVERY%20DALAM%20OLAHRAGA",
+  "isRemoved": false,
+  "date_created": 1629675120949,
+  "email": "farhan.fadila1717@gmail.com",
+  "campuss": {
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung"
+  },
+  "title": "Kesehatan otot",
+  "description": "Pada umumnya yang terjadi pada para olahragawan ialah kepayahan karena neuromuscular junction, kepayahan mekanisme kontraksi otot, dan kepayahan susunan saraf pusat. Sedangakan ke payahan dari saraf, yaitu tidak dapat mengirimkan impuls, hampir tidak pernah terjadi, oleh karenanya tidak memegang peranan yang penting.",
+  "category": "Kedokteran",
+  "document_url": "1629675120930---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61231897112d172a5c2ad74a"
+  },
+  "download_count": 1,
+  "posting_type": "Public",
+  "source": "http://lib.um.ac.id/wp-content/uploads/2017/09/Madziatul-Churiyah-2-Mengenal-Ekonomi-Syariah.pdf",
+  "isRemoved": false,
+  "date_created": 1629690007958,
+  "email": "fandy@gmail.com",
+  "campuss": {
+    "campuss_id": "222",
+    "campuss_name": "Universitas Indonesia"
+  },
+  "title": "Ekonomi syariah",
+  "description": "Ekonomi syariah merupakan ilmu pengetahuan sosial yang mempelajari masalah-masalah ekonomi rakyat yang dilhami oleh nilai-nilai Islam. Ekonomi syariah atau sistem ekonomi koperasi berbeda dari kapitalisme, sosialisme, maupun negara kesejahteraan (Welfare State). Berbeda dari sistem kapitalisme, sistem Ekonomi Islam menentang eksploitasi oleh pemilik modal terhadap buruh yang miskin, dan melarang penumpukan kekayaan. Selain itu, ekonomi dalam kacamata Islam merupakan tuntutan kehidupan sekaligus anjuran yang memiliki dimensi ibadah yang teraplikasi dalam etika dan moral syariah islam.",
+  "category": "Ekonomi",
+  "document_url": "1629690007859---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "612319a3361e1e23cc13099b"
+  },
+  "download_count": 0,
+  "posting_type": "Private",
+  "source": "https://media.neliti.com/media/publications/37924-ID-krisis-ekonomi-indonesia.pdf",
+  "isRemoved": false,
+  "date_created": 1629690275677,
+  "email": "fandy@gmail.com",
+  "campuss": {
+    "campuss_id": "222",
+    "campuss_name": "Universitas Indonesia"
+  },
+  "title": "Krisis ekonomi indonesia",
+  "description": "Krisis ekonomi adalah kondisi yang dialami oleh suatu negara ketika warga negara tidak lagi mempercayakan urusan keuangan negara kepada pemerintah. Kondisi krisis terjadi jika keseluruhan kondisi ekonomi memberikan pengaruh ke sektor lainnya.",
+  "category": "Ekonomi",
+  "document_url": "1629690275671---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61231d0a8910aa19b4dbc296"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "http://www.sma5solo.sch.id/download/modul_html.pdf",
+  "isRemoved": false,
+  "date_created": 1629691146310,
+  "email": "fuad@gmail.com",
+  "campuss": {
+    "campuss_id": "333",
+    "campuss_name": "Universitas Gajah Mada"
+  },
+  "title": "HTML dasar",
+  "description": "Hypertext Markup Language adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet. Ini dapat dibantu oleh teknologi seperti Cascading Style Sheets dan bahasa scripting seperti JavaScript dan VBScript.",
+  "category": "Teknologi",
+  "document_url": "1629691146250---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61231d6e8910aa19b4dbc29a"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "https://science.raphael.poss.name/programming-syllabus/ternary.pdf",
+  "isRemoved": false,
+  "date_created": 1629691246071,
+  "email": "fuad@gmail.com",
+  "campuss": {
+    "campuss_id": "333",
+    "campuss_name": "Universitas Gajah Mada"
+  },
+  "title": "Terninary operator",
+  "description": "Dalam pemrograman komputer,?: Adalah operator ternary yang merupakan bagian dari sintaks untuk ekspresi kondisional dasar dalam beberapa bahasa pemrograman. Biasanya disebut sebagai operator kondisional, inline if, atau ternary if. Ekspresi a? b: c mengevaluasi menjadi b jika nilai a benar, dan sebaliknya c.",
+  "category": "Teknologi",
+  "document_url": "1629691246067---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61231e168910aa19b4dbc29e"
+  },
+  "download_count": 0,
+  "posting_type": "Private",
+  "source": "http://staffnew.uny.ac.id/upload/132315977/pendidikan/LogikaP3-AritmatikaBiner.pdf",
+  "isRemoved": false,
+  "date_created": 1629691414303,
+  "email": "fuad@gmail.com",
+  "campuss": {
+    "campuss_id": "333",
+    "campuss_name": "Universitas Gajah Mada"
+  },
+  "title": "Aritmartika biner",
+  "description": "Sistem bilangan biner atau sistem bilangan basis dua adalah sebuah sistem penulisan angka dengan menggunakan dua simbol yaitu 0 dan 1. Sistem bilangan biner modern ditemukan oleh Gottfried Wilhelm Leibniz pada abad ke-17. Sistem bilangan ini merupakan dasar dari semua sistem bilangan berbasis digital.",
+  "category": "Teknologi",
+  "document_url": "1629691414297---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61237c4d67784d3494b91a92"
+  },
+  "download_count": 2,
+  "posting_type": "Public",
+  "source": "https://pusdatin.kemkes.go.id/download.php?file=download/pusdatin/buletin/buletin-malaria.pdf",
+  "isRemoved": false,
+  "date_created": 1629715533487,
+  "email": "farhan.fadila1717@gmail.com",
+  "campuss": {
+    "campuss_id": "111",
+    "campuss_name": "Institut Teknologi Bandung"
+  },
+  "title": "Penyakit malaria",
+  "description": "Penyakit yang disebabkan oleh parasit plasmodium, ditularkan melalui gigitan nyamuk yang terinfeksi.\r\nTingkat keparahan malaria bervariasi berdasarkan spesies plasmodium.\r\nGejala berupa menggigil, demam, dan berkeringat, biasanya terjadi beberapa minggu setelah digigit.\r\nOrang yang bepergian ke daerah rawan malaria biasanya mengonsumsi obat pelindung sebelum, selama, dan setelah perjalanan. Penanganan termasuk mengonsumsi obat antimalaria.",
+  "category": "Kedokteran",
+  "document_url": "1629715533444---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61238db5162182119c4e60c8"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "http://repository.usu.ac.id/bitstream/handle/12345",
+  "isRemoved": false,
+  "date_created": 1629719989282,
+  "email": "antonius@gmail.com",
+  "campuss": {
+    "campuss_id": "444",
+    "campuss_name": "Institut Teknologi Sepuluh"
+  },
+  "title": "Sejarah java",
+  "description": "Java adalah bahasa pemrograman yang dapat dijalankan di berbagai komputer termasuk telepon genggam. Bahasa ini awalnya dibuat oleh James Gosling saat masih bergabung di Sun Microsystems, yang saat ini merupakan bagian dari Oracle dan dirilis tahun 1995. Bahasa ini banyak mengadopsi sintaksis yang terdapat pada C dan C++ namun dengan sintaksis model objek yang lebih sederhana serta dukungan rutin-rutin aras bawah yang minimal. Aplikasi-aplikasi berbasis java umumnya dikompilasi ke dalam p-code (bytecode) dan dapat dijalankan pada berbagai Mesin Virtual Java (JVM).",
+  "category": "Teknologi",
+  "document_url": "1629719989273---posting_share_doc.pdf",
+  "__v": 0
+}]

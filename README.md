@@ -21,7 +21,7 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
   ```sh
     git clone https://github.com/farhanfadila1717/triplef
   ```
-* mengimpor semua collection untuk mongoDB, dan dengan nama database `triplef`
+* Mengimpor semua collection untuk mongoDB dari folder collection, dan dengan nama database `triplef`
 * Buka projek dengan code editor / IDE anda
 * Mendapatkan semua package/modul terinstall [npm](https://www.npmjs.com/)
   ```sh

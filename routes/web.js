@@ -49,7 +49,7 @@ module.exports = (app) => {
           }
         }
       ]);
-      return res.render('page/index', {
+      return res.render('page/home', {
         layout: 'layout/main_layout',
         title: appName,
         page_name: 'home',
@@ -59,7 +59,11 @@ module.exports = (app) => {
         popular: popular ?? [],
       });
     } else {
-      return res.send('Landing Page');
+      return res.render('index', {
+        layout: 'layout/main_auth',
+        title: appName,
+        page_name: 'home',
+      });
     }
   });
 
@@ -265,7 +269,7 @@ module.exports = (app) => {
 
     res.render('login', {
       layout: 'layout/main_auth',
-      title: 'login',
+      title: 'Login',
       message,
     });
   });
@@ -372,7 +376,7 @@ module.exports = (app) => {
   app.get('/logout', AuthenticationMiddleware.isAuth, (req, res) => {
     req.session.destroy((err) => {
       if (err) throw err;
-      res.redirect("/login");
+      res.redirect("/");
     });
   });
 
@@ -426,6 +430,9 @@ module.exports = (app) => {
   });
 
   app.get('*', (req, res) => {
-    res.status(404).send('What???');
+    res.render('404', {
+      layout: 'layout/main_auth',
+      title: '404 Not Found',
+    })
   });
 }

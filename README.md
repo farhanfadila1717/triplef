@@ -1,6 +1,6 @@
 ## [![cover][]][cover]
 
-## Tech Stack
+## Teknologi yang kami gunakan
 * [Node JS](https://nodejs.org/en/)
 * [Mongo DB](https://www.mongodb.com/try/download/community)
 * [EJS Engine](https://ejs.co/)
@@ -8,30 +8,32 @@
 
 ---
 
-## How to install project
-* First instal requirement(Tech Stack) NodeJS, MongoDB.
-* Import database in folder db
-* Clone repository
+## Cara menginstall dan menjalankan projek ini
+* Pertma Anda harus mengintal semua(Teknologi yang kami gunakan) NodeJS, MongoDB.
+* ⚠️ Pastikan komputer Anda terhubung internet.
+* Mengclone projek
   ```sh
     git clone https://github.com/farhanfadila1717/triplef
   ```
-* Open project with your favotite ❤️ IDE
-* Get node modules with [npm](https://www.npmjs.com/)
+* mengimpor semua collection untuk mongoDB, dan dengan nama database `triplef`
+* Buka projek dengan code editor / IDE anda
+* Mendapatkan semua package/modul terinstall [npm](https://www.npmjs.com/)
   ```sh
     npm i
   ```
-* Run project with comand line with [nodemon](https://www.npmjs.com/package/nodemon)
+* Buka terminal, dan pastikan sudah mengarahkan directory ke projek
+* Menjalankan perintah [nodemon](https://www.npmjs.com/package/nodemon) di terminal
   ```sh
     nodemon
   ```
-* And done, this project run localhost port 5000 ⚡
+* dan selesai, projek ini berjalan di port 5000 ⚡
 
 ---
 
-### 🚧 Maintener
-| [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|
-| :-----: |:-----: |
-|   **Farhan**  |**Fandy**|
+### 👾 Team Kami
+| [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|[![fuad avatar][]][fuad account]|
+| :-----: |:-----: |:-----: |
+|   **Farhan**  |**Fandy**|**Fuad**|
 
 
  <br>
@@ -41,3 +43,5 @@
 [github account]: https://github.com/farhanfadila1717
 [fandy avatar]: https://avatars.githubusercontent.com/u/22866777?s=80
 [fandy account]: https://github.com/fandyramadhan
+[fuad avatar]: https://avatars.githubusercontent.com/u/89235793?s=80
+[fuad account]: https://github.com/Fuadzulyansah

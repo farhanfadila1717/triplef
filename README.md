@@ -48,6 +48,8 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 
 ---
 
+### ☎️ Contact
+Jika ada kesulitan menjalankan projek bisa hubungi kami atau 
 
 ### 👾 Team Kami
 | [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|[![fuad avatar][]][fuad account]|
@@ -65,3 +67,4 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 [fandy account]: https://github.com/fandyramadhan
 [fuad avatar]: https://avatars.githubusercontent.com/u/89235793?s=80
 [fuad account]: https://github.com/Fuadzulyansah
+[fuad wa]: https://wa.me/+6285715658268

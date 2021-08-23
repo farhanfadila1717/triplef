@@ -15,13 +15,13 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 ---
 
 ## Cara menginstall dan menjalankan projek ini
-* Pertma Anda harus mengintal semua(Teknologi yang kami gunakan) NodeJS, MongoDB.
+* Pertama Anda harus mengintal semua(Teknologi yang kami gunakan) NodeJS, MongoDB.
 * ⚠️ Pastikan komputer Anda terhubung internet.
 * Mengclone projek
   ```sh
     git clone https://github.com/farhanfadila1717/triplef
   ```
-* Mengimpor semua collection untuk mongoDB dari folde r collection, dan dengan nama database `triplef` <br>
+* Mengimpor semua collection untuk mongoDB dari folder collection, dan dengan nama database `triplef` <br>
   [![db rules][]][db rules]
 * Buka projek dengan code editor / IDE anda
 * Mendapatkan semua package/modul terinstall [npm](https://www.npmjs.com/)

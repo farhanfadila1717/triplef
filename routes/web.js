@@ -4,12 +4,10 @@ const app = express();
 const appName = 'Share.doc';
 
 
-
 module.exports = (app) => {
-
-    app.get('/', (req, res) => {
+    app.get('/home', (req, res) => {
         res.render('layout/main_layout', {
-            layout: '../page/index',
+            layout: '../page/home',
             title: appName,
             page_name: 'home',
         })
@@ -76,4 +74,18 @@ module.exports = (app) => {
             title: 'register',
         })
     })
+
+    app.get('/', (req, res) => {
+        res.render('layout/main_auth', {
+            layout: '../index',
+            title: appName,
+        })
+    })
+
+    app.get('*', (req, res) => {
+        res.render('layout/main_auth', {
+            layout: '../404',
+            title: 'error',
+        })
+    });
 }

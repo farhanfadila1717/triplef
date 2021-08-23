@@ -1,6 +1,5 @@
-## [![cover][]][cover]
-
 # Share.doc
+## [![cover][]][cover]
 **#Nikmati indahnya berbagi dokumen.**<br>
 Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, bergabung bersama kami untuk menikmati indahnya berbagi.
 

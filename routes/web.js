@@ -269,7 +269,7 @@ module.exports = (app) => {
 
     res.render('login', {
       layout: 'layout/main_auth',
-      title: 'login',
+      title: 'Login',
       message,
     });
   });
@@ -376,7 +376,7 @@ module.exports = (app) => {
   app.get('/logout', AuthenticationMiddleware.isAuth, (req, res) => {
     req.session.destroy((err) => {
       if (err) throw err;
-      res.redirect("/login");
+      res.redirect("/");
     });
   });
 

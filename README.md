@@ -49,7 +49,7 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 ---
 
 ### ☎️ Contact
-Jika ada kesulitan menjalankan projek bisa hubungi kami atau 
+Jika ada kesulitan menjalankan projek bisa hubungi kami atau ketua kami [Fuad][fuad wa]
 
 ### 👾 Team Kami
 | [![account avatar][]][github account]|[![fandy avatar][]][fandy account]|[![fuad avatar][]][fuad account]|

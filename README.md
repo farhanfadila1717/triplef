@@ -15,7 +15,7 @@ Dengan Share.doc kita dapat berbagi serta menyimpan atau mengarsipkan dokumen, b
 
 ## Demo Apps
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yUwluPDG_3Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![embed cover][]][embed cover]
 
 ---
 
@@ -77,3 +77,4 @@ Jika ada kesulitan menjalankan projek bisa hubungi kami atau ketua kami [Fuad][f
 [fuad avatar]: https://avatars.githubusercontent.com/u/89235793?s=80
 [fuad account]: https://github.com/Fuadzulyansah
 [fuad wa]: https://wa.me/+6285715658268
+[embed cover]:https://github.com/farhanfadila1717/triplef/blob/master/embed.png

@@ -180,6 +180,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #00008C;
 }
 
+.btn-outline-blue:hover {
+    color: white !important;
+    background-color: #00008C;
+}
+
 .navbar-landing .navbar-nav .btn {
     margin-left: 30px;
     width: 150px;

@@ -21,7 +21,7 @@
   "_id": {
     "$oid": "6122d9a858323a33d41db27c"
   },
-  "download_count": 2,
+  "download_count": 3,
   "posting_type": "Public",
   "source": "http://repository.usu.ac.id/bitstream/handle/123456789/16045/08E00009.pdf?sequence=2",
   "isRemoved": false,
@@ -78,7 +78,7 @@
   "_id": {
     "$oid": "61231897112d172a5c2ad74a"
   },
-  "download_count": 1,
+  "download_count": 2,
   "posting_type": "Public",
   "source": "http://lib.um.ac.id/wp-content/uploads/2017/09/Madziatul-Churiyah-2-Mengenal-Ekonomi-Syariah.pdf",
   "isRemoved": false,
@@ -173,7 +173,7 @@
   "_id": {
     "$oid": "61237c4d67784d3494b91a92"
   },
-  "download_count": 2,
+  "download_count": 3,
   "posting_type": "Public",
   "source": "https://pusdatin.kemkes.go.id/download.php?file=download/pusdatin/buletin/buletin-malaria.pdf",
   "isRemoved": false,
@@ -206,5 +206,62 @@
   "description": "Java adalah bahasa pemrograman yang dapat dijalankan di berbagai komputer termasuk telepon genggam. Bahasa ini awalnya dibuat oleh James Gosling saat masih bergabung di Sun Microsystems, yang saat ini merupakan bagian dari Oracle dan dirilis tahun 1995. Bahasa ini banyak mengadopsi sintaksis yang terdapat pada C dan C++ namun dengan sintaksis model objek yang lebih sederhana serta dukungan rutin-rutin aras bawah yang minimal. Aplikasi-aplikasi berbasis java umumnya dikompilasi ke dalam p-code (bytecode) dan dapat dijalankan pada berbagai Mesin Virtual Java (JVM).",
   "category": "Teknologi",
   "document_url": "1629719989273---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6126f96d0697570c3042ac6e"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "http://repository.usu.ac.id/bitstream/handle/12345",
+  "isRemoved": true,
+  "date_created": 1629944173226,
+  "email": "antonius@gmail.com",
+  "campuss": {
+    "campuss_id": "444",
+    "campuss_name": "Institut Teknologi Sepuluh"
+  },
+  "title": "Sistem Operasi pada komputer",
+  "description": "Sistem operasi pada komputer ",
+  "category": "Teknologi",
+  "document_url": "1629944173214---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6126fa460697570c3042ac96"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "http://repository.usu.ac.id/bitstream/handle/12345",
+  "isRemoved": true,
+  "date_created": 1629944390049,
+  "email": "antonius@gmail.com",
+  "campuss": {
+    "campuss_id": "444",
+    "campuss_name": "Institut Teknologi Sepuluh"
+  },
+  "title": "Sistem basis data",
+  "description": "Sistem basis data",
+  "category": "Teknologi",
+  "document_url": "1629944390045---posting_share_doc.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6126fb5a0697570c3042acc7"
+  },
+  "download_count": 0,
+  "posting_type": "Public",
+  "source": "http://repository.usu.ac.id/bitstream/handle/12345",
+  "isRemoved": true,
+  "date_created": 1629944666294,
+  "email": "antonius@gmail.com",
+  "campuss": {
+    "campuss_id": "444",
+    "campuss_name": "Institut Teknologi Sepuluh"
+  },
+  "title": "Sistem Operasi pada komputer",
+  "description": "Sistem operasi windows",
+  "category": "Teknologi",
+  "document_url": "1629944666290---posting_share_doc.pdf",
   "__v": 0
 }]
